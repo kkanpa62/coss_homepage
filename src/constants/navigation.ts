@@ -1,15 +1,17 @@
 /**
- * 네비게이션 메뉴 항목 정의
- * 
- * 상단 네비게이션 바에 표시될 메뉴 항목들을 중앙에서 관리합니다.
- * 새로운 페이지를 추가하거나 메뉴 순서를 변경할 때 이 파일만 수정하면 됩니다.
+ * @file navigation.ts
+ * @description 웹사이트의 상단 네비게이션 메뉴 항목을 정의합니다.
+ *              메뉴의 순서나 이름을 변경할 때 이 파일을 수정합니다.
+ * @exports navigationItems - NavigationItem 타입의 배열로 구성된 메뉴 데이터
  */
 
 import { NavigationItem } from '../types';
 
 /**
- * 네비게이션 메뉴 항목 배열
- * 배열의 순서대로 네비게이션 바에 표시됩니다.
+ * @constant navigationItems
+ * @type {NavigationItem[]}
+ * @description 상단 네비게이션 바에 표시될 메뉴 항목의 배열입니다.
+ *              배열의 순서가 실제 메뉴의 순서를 결정합니다.
  */
 export const navigationItems: NavigationItem[] = [
   { id: 'home', label: '홈' },

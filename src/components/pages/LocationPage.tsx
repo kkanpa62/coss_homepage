@@ -1,19 +1,24 @@
 /**
- * LocationPage 컴포넌트
- * 
- * COSS KNP GROUP의 위치 및 연락처 정보를 표시하는 페이지입니다.
- * 주소, 전화번호, 이메일, 운영시간 정보와 함께 구글맵을 제공합니다.
+ * @file LocationPage.tsx
+ * @description COSS KNP GROUP의 위치 및 연락처 정보를 표시하는 페이지 컴포넌트입니다.
+ * @component LocationPage
+ * @imports React, framer-motion, lucide-react, custom UI components, constants
  */
 
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
-import { MapPin, Phone, Mail, Clock, AlertCircle, RefreshCw } from 'lucide-react';
+import { MapPin, Phone, Mail, AlertCircle, RefreshCw } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';
 import { locationInfo } from '../../constants/location';
 
 /**
- * 연락처 정보 아이템 컴포넌트
+ * @interface ContactItemProps
+ * @description 연락처 정보 아이템 컴포넌트의 props 타입을 정의합니다.
+ * @property {React.ReactNode} icon - 아이템 좌측에 표시될 아이콘
+ * @property {string} title - 정보의 제목 (예: "주소")
+ * @property {React.ReactNode} content - 정보의 상세 내용
+ * @property {string} colorClass - 아이콘 배경색을 위한 Tailwind CSS 클래스
  */
 interface ContactItemProps {
   icon: React.ReactNode;
@@ -22,6 +27,12 @@ interface ContactItemProps {
   colorClass: string;
 }
 
+/**
+ * @component ContactItem
+ * @description 아이콘, 제목, 내용으로 구성된 연락처 정보 아이템을 렌더링합니다.
+ * @param {ContactItemProps} props - 컴포넌트 props
+ * @returns {JSX.Element}
+ */
 function ContactItem({ icon, title, content, colorClass }: ContactItemProps) {
   return (
     <div className="flex items-start gap-4">
@@ -39,166 +50,159 @@ function ContactItem({ icon, title, content, colorClass }: ContactItemProps) {
 }
 
 /**
- * 구글맵 컴포넌트 - 강화된 에러 핸들링과 상태 관리
+ * @component MissingApiKeyWarning
+ * @description Google Maps API 키가 없을 때 표시되는 경고 컴포넌트입니다.
+ * @returns {JSX.Element}
+ */
+const MissingApiKeyWarning = () => (
+  <Card className="aspect-video bg-muted flex items-center justify-center">
+    <div className="text-center p-4">
+      <div className="flex items-center justify-center gap-2 mb-2">
+        <AlertCircle className="w-5 h-5 text-red-500" />
+        <h4 className="font-medium text-red-500">지도 로딩 실패</h4>
+      </div>
+      <p className="text-sm text-muted-foreground">
+        Google Maps API 키가 설정되지 않았습니다.
+      </p>
+    </div>
+  </Card>
+);
+
+/**
+ * @component MapLoadingIndicator
+ * @description 지도를 불러오는 동안 표시되는 로딩 스피너 컴포넌트입니다.
+ * @returns {JSX.Element}
+ */
+const MapLoadingIndicator = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-muted z-10">
+    <div className="text-center">
+      <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-2"></div>
+      <p className="text-sm text-muted-foreground">지도를 불러오는 중...</p>
+    </div>
+  </div>
+);
+
+/**
+ * @interface MapErrorDisplayProps
+ * @description 지도 로딩 에러 컴포넌트의 props 타입을 정의합니다.
+ * @property {() => void} onRetry - '다시 시도' 버튼 클릭 시 호출될 함수
+ * @property {boolean} canRetry - 재시도 가능 여부
+ * @property {number} retriesLeft - 남은 재시도 횟수
+ * @property {string} fullAddress - 구글맵에서 보기 링크에 사용될 전체 주소
+ */
+interface MapErrorDisplayProps {
+  onRetry: () => void;
+  canRetry: boolean;
+  retriesLeft: number;
+  fullAddress: string;
+}
+
+/**
+ * @component MapErrorDisplay
+ * @description 지도 로딩에 실패했을 때 표시되는 에러 UI 컴포넌트입니다.
+ * @param {MapErrorDisplayProps} props - 컴포넌트 props
+ * @returns {JSX.Element}
+ */
+const MapErrorDisplay = ({ onRetry, canRetry, retriesLeft, fullAddress }: MapErrorDisplayProps) => (
+  <Card className="aspect-video bg-muted flex items-center justify-center">
+    <div className="text-center p-6 max-w-md">
+      <div className="flex items-center justify-center gap-2 mb-4">
+        <AlertCircle className="w-6 h-6 text-orange-500" />
+        <h4 className="font-medium text-orange-600">지도 로딩 중 오류</h4>
+      </div>
+      <p className="text-sm text-muted-foreground mb-4">
+        Google Maps를 표시할 수 없습니다. 인터넷 연결이나 API 키 설정을 확인해주세요.
+      </p>
+      <div className="flex gap-2 justify-center">
+        {canRetry && (
+          <button
+            onClick={onRetry}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            다시 시도 ({retriesLeft})
+          </button>
+        )}
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-chart-1 to-chart-5 text-white rounded-lg hover:shadow-lg transition-all"
+        >
+          <MapPin className="w-4 h-4" />
+          구글맵에서 보기
+        </a>
+      </div>
+    </div>
+  </Card>
+);
+
+/**
+ * @component GoogleMap
+ * @description Google Maps를 iframe으로 임베드하고, 로딩 및 에러 상태를 관리하는 컴포넌트입니다.
+ * @returns {JSX.Element}
  */
 function GoogleMap() {
   const { address, googleMapsApiKey } = locationInfo;
-  const [mapError, setMapError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [mapError, setMapError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
 
-  // API 키가 없을 경우 에러 표시
-  if (!googleMapsApiKey) {
-    console.error('Google Maps API key is missing!');
-    return (
-      <Card className="aspect-video bg-muted flex items-center justify-center">
-        <div className="text-center p-4">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <AlertCircle className="w-5 h-5 text-red-500" />
-            <h4 className="font-medium text-red-500">지도 로딩 실패</h4>
-          </div>
-          <p className="text-sm text-muted-foreground mb-4">
-            Google Maps API 키가 설정되지 않았습니다.
-            <br />
-            <code>.env</code> 파일에 <code>VITE_GOOGLE_MAPS_API_KEY</code>를 설정해주세요.
-          </p>
-        </div>
-      </Card>
-    );
-  }
+  const MAX_RETRIES = 2;
 
-  // iframe URL 생성
-  const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(address.fullAddress)}`;
-
-  // 현재 환경 확인
-  const isDevelopment = typeof import.meta !== 'undefined' && import.meta.env?.DEV;
-  const currentDomain = typeof window !== 'undefined' ? window.location.hostname : '';
-
-  // 개발 환경에서 도메인 제한 경고 로그
-  if (isDevelopment && retryCount === 0) {
-    console.log('🗺️ 지도 초기화 시작');
-    console.log('📍 도메인:', currentDomain);
-    console.log('🔗 URL:', embedUrl);
-
-    if (currentDomain === 'localhost' || currentDomain === '127.0.0.1' || currentDomain.includes('localhost')) {
-      console.warn('⚠️ localhost에서 Google Maps 제한 가능성 존재');
-      console.warn('🔧 해결 방법: https://console.cloud.google.com/google/maps-apis');
-    }
-  }
-
-  // iframe 에러 핸들러
-  const handleIframeError = useCallback(() => {
-    console.error('❌ 지도 로딩 실패 (시도 횟수: ' + (retryCount + 1) + ')');
-    setMapError(true);
+  const handleIframeLoad = useCallback(() => {
     setIsLoading(false);
+    setMapError(false);
+  }, []);
+
+  const handleIframeError = useCallback(() => {
+    setIsLoading(false);
+    setMapError(true);
+  }, []);
+
+  const handleRetry = useCallback(() => {
+    if (retryCount < MAX_RETRIES) {
+      setIsLoading(true);
+      setMapError(false);
+      setRetryCount(prev => prev + 1);
+    }
   }, [retryCount]);
 
-  // iframe 로드 성공 핸들러
-  const handleIframeLoad = useCallback(() => {
-    console.log('✅ 지도 로딩 성공');
-    setMapError(false);
-    setIsLoading(false);
-  }, []);
+  if (!googleMapsApiKey) {
+    return <MissingApiKeyWarning />;
+  }
 
-  // 다시 시도 핸들러
-  const handleRetry = useCallback(() => {
-    setMapError(false);
-    setIsLoading(true);
-    setRetryCount(prev => prev + 1);
-    console.log('🔄 지도 로딩 재시도...');
-  }, []);
-
-  // 최대 재시도 횟수 확인
-  const maxRetries = 2;
-  const canRetry = !isLoading && mapError && retryCount < maxRetries;
-
-  // 에러 상태 UI
   if (mapError) {
     return (
-      <Card className="aspect-video bg-muted flex items-center justify-center">
-        <div className="text-center p-6 max-w-md">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <AlertCircle className="w-6 h-6 text-orange-500" />
-            <h4 className="font-medium text-orange-600">지도 로딩 중 오류</h4>
-          </div>
-
-          <div className="space-y-3 text-sm text-muted-foreground mb-4">
-            <p>Google Maps를 표시할 수 없습니다. 다음 중 하나의 문제일 수 있습니다:</p>
-            <ul className="text-left space-y-1 ml-4">
-              <li>• API 키가 유효하지 않거나 제한됨</li>
-              <li>• Maps Embed API가 활성화되지 않음</li>
-              <li>• 인터넷 연결 문제</li>
-              <li>• 일시적인 Google 서비스 장애</li>
-            </ul>
-          </div>
-
-          <div className="flex gap-2 justify-center">
-            {canRetry && (
-              <button
-                onClick={handleRetry}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                <RefreshCw className="w-4 h-4" />
-                다시 시도 ({maxRetries - retryCount})
-              </button>
-            )}
-
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address.fullAddress)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-chart-1 to-chart-5 text-white rounded-lg hover:shadow-lg transition-all"
-            >
-              <MapPin className="w-4 h-4" />
-              구글맵에서 보기
-            </a>
-          </div>
-
-          <details className="mt-4 text-left">
-            <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground">
-              🛠️ 개발자 정보
-            </summary>
-            <div className="mt-2 text-xs font-mono bg-muted p-2 rounded">
-              <div>Domain: {currentDomain}</div>
-              <div>API Key: {googleMapsApiKey ? `${googleMapsApiKey.slice(0, 20)}...` : '없음'}</div>
-              <div>Address: {address.fullAddress}</div>
-              <div>Env: {isDevelopment ? 'development' : 'production'}</div>
-            </div>
-          </details>
-        </div>
-      </Card>
+      <MapErrorDisplay
+        onRetry={handleRetry}
+        canRetry={retryCount < MAX_RETRIES}
+        retriesLeft={MAX_RETRIES - retryCount}
+        fullAddress={address.fullAddress}
+      />
     );
   }
+
+  const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(address.fullAddress)}`;
 
   return (
     <div className="space-y-4">
-      {/* 구글맵 임베드 */}
       <Card className="overflow-hidden aspect-video bg-muted hover:shadow-xl transition-all duration-300 relative">
-        {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-muted z-10">
-            <div className="text-center">
-              <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-2"></div>
-              <p className="text-sm text-muted-foreground">지도를 불러오는 중...</p>
-            </div>
-          </div>
-        )}
-
+        {isLoading && <MapLoadingIndicator />}
         <iframe
           key={retryCount} // 재시도 시 iframe을 강제로 리렌더링
           src={embedUrl}
           width="100%"
           height="100%"
-          style={{ border: 0 }}
+          style={{ border: 0, visibility: isLoading ? 'hidden' : 'visible' }}
           allowFullScreen
           loading="lazy"
-          referrerPolicy={isDevelopment ? "no-referrer" : "no-referrer-when-downgrade"}
+          referrerPolicy="no-referrer-when-downgrade"
           title="COSS KNP GROUP 위치"
-          onError={handleIframeError}
           onLoad={handleIframeLoad}
+          onError={handleIframeError}
         />
       </Card>
-
-      {/* 구글맵에서 보기 버튼 */}
       <a
         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address.fullAddress)}`}
         target="_blank"
@@ -212,96 +216,56 @@ function GoogleMap() {
   );
 }
 
+/**
+ * @component LocationPage
+ * @description '오시는길' 페이지의 전체 레이아웃과 컨텐츠를 구성합니다.
+ * @returns {JSX.Element}
+ */
 export function LocationPage() {
   const { address, contact, businessHours, emailInfo } = locationInfo;
+
+  const contactItems = [
+    {
+      icon: <MapPin className="w-6 h-6 text-chart-1" />,
+      title: "주소",
+      content: <>{address.street}<br />{address.building}<br />우편번호: {address.postalCode}</>,
+      colorClass: "bg-chart-1/10"
+    },
+    {
+      icon: <Phone className="w-6 h-6 text-chart-2" />,
+      title: "전화번호",
+      content: <>{contact.phone}<br /><br />{businessHours.weekday}<br />{businessHours.lunch}</>,
+      colorClass: "bg-chart-2/10"
+    },
+    {
+      icon: <Mail className="w-6 h-6 text-chart-3" />,
+      title: "이메일",
+      content: <>{contact.email}<br /><br />{emailInfo.availability}<br />{emailInfo.responseTime}</>,
+      colorClass: "bg-chart-3/10"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-chart-5/5 to-background py-20">
       <div className="container mx-auto px-4">
-        {/* 페이지 헤더 */}
-        <SectionHeader 
-          title="오시는길"
-        />
+        <SectionHeader title="오시는길" />
 
         <div className="max-w-5xl mx-auto">
           {/* 연락처 정보 그리드 */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {/* 주소 카드 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.6 }}
-            >
-              <Card className="p-6 h-full hover:shadow-lg transition-shadow">
-                <ContactItem
-                  icon={<MapPin className="w-6 h-6 text-chart-1" />}
-                  title="주소"
-                  content={
-                    <>
-                      {address.street}
-                      <br />
-                      {address.building}
-                      <br />
-                      우편번호: {address.postalCode}
-                    </>
-                  }
-                  colorClass="bg-chart-1/10"
-                />
-              </Card>
-            </motion.div>
-
-            {/* 전화번호 카드 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <Card className="p-6 h-full hover:shadow-lg transition-shadow">
-                <ContactItem
-                  icon={<Phone className="w-6 h-6 text-chart-2" />}
-                  title="전화번호"
-                  content={
-                    <>
-                      {contact.phone}
-                      <br />
-                      <br />
-                      {businessHours.weekday}
-                      <br />
-                      {businessHours.lunch}
-                    </>
-                  }
-                  colorClass="bg-chart-2/10"
-                />
-              </Card>
-            </motion.div>
-
-            {/* 이메일 카드 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              <Card className="p-6 h-full hover:shadow-lg transition-shadow">
-                <ContactItem
-                  icon={<Mail className="w-6 h-6 text-chart-3" />}
-                  title="이메일"
-                  content={
-                    <>
-                      {contact.email}
-                      <br />
-                      <br />
-                      {emailInfo.availability}
-                      <br />
-                      {emailInfo.responseTime}
-                    </>
-                  }
-                  colorClass="bg-chart-3/10"
-                />
-              </Card>
-            </motion.div>
+            {contactItems.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (index + 1) * 0.1, duration: 0.6 }}
+              >
+                <Card className="p-6 h-full hover:shadow-lg transition-shadow">
+                  <ContactItem {...item} />
+                </Card>
+              </motion.div>
+            ))}
           </div>
 
           {/* 지도 영역 */}
