@@ -20,7 +20,7 @@ import { Member } from '../types';
 
 // ⚠️ 배포 전 수정 필요: figma:asset 경로를 실제 이미지 경로로 변경하세요
 // 구성원 프로필 이미지 import
-   const kimImage = '/src/images/members/kim.png';
+   const kimImage = '/images/members/kim.png';
    const sonImage = '/images/members/son.png';
    const parkImage = '/images/members/park.png';
    const ohImage = '/images/members/oh.png';
