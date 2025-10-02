@@ -1,51 +1,64 @@
 /**
- * COSS KNP GROUP 웹사이트 타입 정의
- * 
- * 애플리케이션 전역에서 사용되는 TypeScript 타입과 인터페이스를 정의합니다.
+ * @file index.ts
+ * @description 애플리케이션 전역에서 사용되는 TypeScript 타입과 인터페이스를 정의합니다.
+ *              데이터 구조의 일관성을 유지하고 타입 안정성을 보장하는 역할을 합니다.
  */
 
 /**
- * 페이지 타입
- * 웹사이트의 모든 페이지를 나타내는 유니온 타입
+ * @type PageType
+ * @description 웹사이트의 모든 페이지 종류를 나타내는 식별자입니다.
+ *              App.tsx의 라우팅 로직과 Navigation 컴포넌트에서 사용됩니다.
  */
 export type PageType = 
-  | 'home'           // 홈 페이지
-  | 'about'          // 회사소개
-  | 'services'       // 업무분야
-  | 'members'        // 구성원 목록
-  | 'news'           // 뉴스/소식
-  | 'location'       // 오시는길
-  | 'member-detail'; // 구성원 상세 페이지
+  | 'home'
+  | 'about'
+  | 'services'
+  | 'members'
+  | 'news'
+  | 'location'
+  | 'member-detail';
 
 /**
- * 구성원 정보 인터페이스
- * 각 구성원의 상세 정보를 담는 데이터 구조
+ * @interface Member
+ * @description 구성원 한 명의 상세 정보를 나타내는 데이터 구조입니다.
+ * @property {number} id - 각 구성원을 식별하는 고유 ID
+ * @property {string} name - 구성원의 이름
+ * @property {string} position - 영문 이름 및 직책
+ * @property {string} department - 소속 부서 또는 직급
+ * @property {string} image - 프로필 이미지 경로 (public 디렉토리 기준)
+ * @property {string} [bio] - 구성원의 약력 또는 소개 (선택 사항)
+ * @property {string[]} [education] - 학력 사항 목록 (선택 사항)
+ * @property {string[]} [experience] - 경력 사항 목록 (선택 사항)
+ * @property {string[]} [expertise] - 전문 분야 목록 (선택 사항)
  */
 export interface Member {
-  id: number;              // 고유 식별자
-  name: string;            // 이름
-  position: string;        // 직책/직위
-  department: string;      // 소속 부서
-  image: string;           // 프로필 이미지 URL
-  bio?: string;            // 간단한 소개 (선택적)
-  education?: string[];    // 학력 목록 (선택적)
-  experience?: string[];   // 경력 목록 (선택적)
-  expertise?: string[];    // 전문 분야 목록 (선택적)
+  id: number;
+  name: string;
+  position: string;
+  department: string;
+  image: string;
+  bio?: string;
+  education?: string[];
+  experience?: string[];
+  expertise?: string[];
 }
 
 /**
- * 네비게이션 아이템 인터페이스
- * 상단 네비게이션 메뉴의 각 항목을 나타냄
+ * @interface NavigationItem
+ * @description 상단 네비게이션 메뉴의 각 항목을 정의하는 데이터 구조입니다.
+ * @property {PageType} id - 메뉴 항목이 연결될 페이지의 식별자
+ * @property {string} label - 메뉴에 표시될 텍스트
  */
 export interface NavigationItem {
-  id: PageType;     // 페이지 식별자 (PageType과 연결)
-  label: string;    // 메뉴에 표시될 텍스트
+  id: PageType;
+  label: string;
 }
 
 /**
- * 네비게이션 옵션
- * 페이지 이동 시 추가 옵션을 전달하기 위한 인터페이스
+ * @interface NavigationOptions
+ * @description 페이지 이동 함수(`handleNavigate`)에 전달될 수 있는 추가 옵션입니다.
+ * @property {number} [serviceId] - '업무분야' 페이지로 이동 시, 특정 서비스 섹션으로 스크롤하기 위한 ID (선택 사항)
  */
 export interface NavigationOptions {
-  serviceId?: number;  // 업무분야 페이지의 특정 섹션 ID (스크롤 타겟)
+  serviceId?: number;
 }
