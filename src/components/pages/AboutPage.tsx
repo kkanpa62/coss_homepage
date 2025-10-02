@@ -8,7 +8,7 @@
  * 3. K, N, P 각각의 의미와 전문성
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Separator } from '../ui/separator';

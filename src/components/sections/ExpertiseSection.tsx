@@ -10,7 +10,7 @@
  * - 업무분야 페이지로 스크롤 타겟과 함께 이동
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { SectionHeader } from '../common/SectionHeader';
 import { featuredServices } from '../../constants/services';

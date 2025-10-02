@@ -5,7 +5,7 @@
  * 6개의 주요 서비스 영역으로 구성되어 있습니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { SectionHeader } from '../common/SectionHeader';
