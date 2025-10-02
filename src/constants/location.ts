@@ -31,12 +31,17 @@ export const locationInfo = {
   },
   
   // 구글맵 API 키
-  // 배포 시에는 환경 변수를 사용하고, 개발 환경에서는 하드코딩된 값 사용
+  // 환경 변수에서 로드 (보안을 위해 .env 파일에 설정)
   googleMapsApiKey: (() => {
     try {
-      return (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GOOGLE_MAPS_API_KEY) || 'AIzaSyCqPIOLnMxToQm-T8Fl4avdHpej4xQHq_o';
+      const apiKey = typeof import.meta !== 'undefined' && import.meta.env?.VITE_GOOGLE_MAPS_API_KEY;
+      if (!apiKey) {
+        console.warn('Google Maps API key is not set. Please add VITE_GOOGLE_MAPS_API_KEY to your .env file.');
+      }
+      return apiKey || '';
     } catch {
-      return 'AIzaSyCqPIOLnMxToQm-T8Fl4avdHpej4xQHq_o';
+      console.warn('Failed to load Google Maps API key from environment variables.');
+      return '';
     }
   })(),
 };
