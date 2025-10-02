@@ -4,7 +4,7 @@
  * 전체 구성원 9명을 4열 그리드로 표시하는 페이지입니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ArrowRight } from 'lucide-react';

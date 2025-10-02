@@ -5,7 +5,7 @@
  * "About COSS KNP GROUP" 스타일의 라벨 + 큰 제목 조합을 사용합니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 interface SectionHeaderProps {

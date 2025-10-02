@@ -5,7 +5,7 @@
  * 프로필 이미지, 소개, 학력, 경력, 전문 분야 등을 포함합니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';

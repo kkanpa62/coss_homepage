@@ -10,7 +10,7 @@
  * - 스크롤 다운 인디케이터
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { PageType } from '../../types';
 

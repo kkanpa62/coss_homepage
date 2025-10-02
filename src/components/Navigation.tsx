@@ -5,7 +5,7 @@
  * 로고, 메뉴 항목, 그리고 현재 페이지 하이라이트 기능을 제공합니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { navigationItems } from '../constants/navigation';
 import { PageType } from '../types';

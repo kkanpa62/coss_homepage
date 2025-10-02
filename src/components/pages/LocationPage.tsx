@@ -5,7 +5,7 @@
  * 주소, 전화번호, 이메일, 운영시간 정보와 함께 구글맵을 제공합니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';

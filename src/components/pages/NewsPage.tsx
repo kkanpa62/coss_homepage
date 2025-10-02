@@ -5,7 +5,7 @@
  * 지식재산권 관련 주요 뉴스와 업계 동향을 소개합니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';

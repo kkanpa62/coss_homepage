@@ -5,7 +5,7 @@
  * 김성호, 성진솔, 길진성, 손재용, 문현돈 순서로 표시됩니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ArrowRight } from 'lucide-react';

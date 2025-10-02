@@ -5,7 +5,7 @@
  * 혁신적 기술 전문성, 전문 변리사팀, 글로벌 네트워크를 카드 형태로 표시합니다.
  */
 
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { SectionHeader } from '../common/SectionHeader';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
