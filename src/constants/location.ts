@@ -9,10 +9,10 @@ export const locationInfo = {
     street: '서울특별시 강남구 도곡로 111',
     building: '미진빌딩 5층',
     postalCode: '06253',
-    // 구글맵 검색용 전체 주소
-    fullAddress: '서울특별시 강남구 도곡로 111',
+    // 구글맵 검색용 전체 주소 - 빌딩 정보 포함으로 더 정확한 위치 검색
+    fullAddress: '서울특별시 강남구 도곡로 111 미진빌딩',
     // 구글맵 URL
-    mapUrl: 'https://www.google.com/maps/search/?api=1&query=서울특별시+강남구+도곡로+111',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=서울특별시+강남구+도곡로+111+미진빌딩',
   },
   
   contact: {
