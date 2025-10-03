@@ -30,8 +30,6 @@ export function AboutPage() {
       subtitle: '핵심 전략 수립의 전문가',
       description: 'COSS KNP Group은 고객을 위한 핵심전략 수립의 전문가입니다. 고객의 IP와 컨설팅을 통해 고객의 지식재산 가치를 극대화하고, 새로운 시장을 고객과 함께 열어나갑니다.',
       icon: Lightbulb,
-      gradient: 'from-chart-1 to-chart-5',
-      bgGradient: 'from-chart-1/10 to-chart-5/10',
     },
     {
       letter: 'N',
@@ -39,9 +37,6 @@ export function AboutPage() {
       subtitle: 'Navigation of your high technology',
       description: 'COSS KNP Group은 메타버스, 로봇, AI, 터치센서, 바이오텍, 화학 분야 등 첨단기술의 전문가입니다. 고객의 첨단 기술 항로를 개척하고 특허를 발굴합니다.',
       icon: Rocket,
-      gradient: 'from-chart-2 to-chart-4',
-      bgGradient: 'from-chart-2/10 to-chart-4/10',
-      technologies: ['메타버스', '로봇', 'AI', '터치센서', '바이오텍', '화학', '첨단기술'],
     },
     {
       letter: 'P',
@@ -49,13 +44,11 @@ export function AboutPage() {
       subtitle: '고객의 든든한 파트너',
       description: 'COSS KNP Group은 고객을 만족시킬 수 있는 최고의 지식재산 서비스와 최선의 솔루션을 제공합니다. 언제나 신뢰받을 수 있는 고객의 든든한 파트너가 되겠습니다.',
       icon: Users,
-      gradient: 'from-chart-3 to-chart-1',
-      bgGradient: 'from-chart-3/10 to-chart-1/10',
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/30 to-background pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* 첫 번째 영역: 회사 소개 */}
         <motion.section
@@ -139,7 +132,7 @@ export function AboutPage() {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl mb-4">
-              <span className="bg-gradient-to-r from-chart-1 via-chart-3 to-chart-5 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary via-chart-1 to-chart-5 bg-clip-text text-transparent">
                 KNP
               </span>
             </h2>
@@ -148,23 +141,34 @@ export function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {knpItems.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={item.letter}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7 + index * 0.15, duration: 0.6 }}
-                  className="h-full"
-                >
-                  <Card className={`p-6 lg:p-8 h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-gradient-to-br ${item.bgGradient}`}>
-                    {/* 헤더 영역 */}
-                    <div className="flex flex-col items-center text-center mb-6 pb-6 border-b border-border/50">
-                      <div className={`relative inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-r ${item.gradient} mb-4 shadow-lg`}>
+          <div className="relative p-1 bg-gradient-to-r from-primary via-chart-1 to-chart-5 rounded-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 bg-background rounded-xl p-8">
+              {knpItems.map((item, index) => {
+                const Icon = item.icon;
+                const gradients = [
+                  'from-white to-blue-500',
+                  'from-blue-500 to-red-500',
+                  'from-red-500 to-pink-500',
+                ];
+                const smallIconGradients = [
+                  'from-blue-400 to-blue-600',
+                  'from-red-400 to-red-600',
+                  'from-pink-400 to-pink-600',
+                ];
+                return (
+                  <motion.div
+                    key={item.letter}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 + index * 0.15, duration: 0.6 }}
+                    className="h-full"
+                  >
+                    <Card className="p-6 lg:p-8 h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-transparent border border-border/20">
+                      {/* 헤더 영역 */}
+                      <div className="flex flex-col items-center text-center mb-6 pb-6 border-b border-border/20">
+                      <div className={`relative inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-r ${gradients[index]} mb-4 shadow-lg`}>
                         <span className="text-3xl lg:text-4xl text-white">{item.letter}</span>
-                        <Icon className="absolute -bottom-2 -right-2 w-6 h-6 lg:w-8 lg:h-8 text-white bg-gradient-to-br from-primary to-chart-1 rounded-full p-1.5 shadow-md" />
+                        <Icon className={`absolute -bottom-2 -right-2 w-6 h-6 lg:w-8 lg:h-8 text-white bg-gradient-to-br ${smallIconGradients[index]} rounded-full p-1.5 shadow-md`} />
                       </div>
                       
                       <h3 className="text-xl lg:text-2xl mb-2">{item.title}</h3>
@@ -179,40 +183,12 @@ export function AboutPage() {
                         {item.description}
                       </p>
 
-                      {/* 기술 태그 */}
-                      {item.technologies && (
-                        <div className="pt-4 border-t border-border/50">
-                          <div className="flex flex-wrap gap-2 justify-center">
-                            {item.technologies.map((tech, techIndex) => {
-                              // 각 배지마다 살짝씩 다른 단색 적용
-                              const colors = [
-                                'bg-[oklch(0.6_0.12_185)]',      // 청록색 계열 1
-                                'bg-[oklch(0.65_0.13_170)]',     // 청록-청록녹 중간
-                                'bg-[oklch(0.7_0.14_150)]',      // 청록녹색
-                                'bg-[oklch(0.75_0.16_120)]',     // 녹색 계열
-                                'bg-[oklch(0.78_0.17_100)]',     // 녹색-노란색 중간
-                                'bg-[oklch(0.8_0.18_90)]',       // 연두색
-                                'bg-[oklch(0.82_0.19_85)]',      // 노란색 계열
-                              ];
-                              
-                              return (
-                                <Badge
-                                  key={tech}
-                                  variant="secondary"
-                                  className={`px-3 py-1.5 ${colors[techIndex % colors.length]} text-white border-0 hover:opacity-90 transition-opacity`}
-                                >
-                                  {tech}
-                                </Badge>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </Card>
-                </motion.div>
-              );
-            })}
+                      </div>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </motion.section>
       </div>

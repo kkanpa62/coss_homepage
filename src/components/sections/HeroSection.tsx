@@ -26,13 +26,10 @@ interface HeroSectionProps {
 export function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* 배경 그라데이션 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-chart-1/10 to-chart-5/5" />
-      
       {/* 장식용 배경 요소들 */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-chart-1/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-chart-5/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-chart-1/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-chart-5/10 rounded-full blur-3xl" />
       </div>
 
       {/* 메인 콘텐츠 */}
@@ -52,7 +49,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           >
             인공지능으로
             <br />
-            <span className="bg-gradient-to-r from-primary via-chart-1 to-chart-5 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent">
               미래를 설계합니다
             </span>
           </motion.h1>
