@@ -48,10 +48,12 @@ export interface Member {
  * @description 상단 네비게이션 메뉴의 각 항목을 정의하는 데이터 구조입니다.
  * @property {PageType} id - 메뉴 항목이 연결될 페이지의 식별자
  * @property {string} label - 메뉴에 표시될 텍스트
+ * @property {string} path - React Router에서 사용할 실제 경로
  */
 export interface NavigationItem {
   id: PageType;
   label: string;
+  path: string;
 }
 
 /**

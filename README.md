@@ -40,6 +40,8 @@ VITE_GOOGLE_MAPS_API_KEY=your_actual_api_key_here
 npm run dev
 ```
 
+When the dev server is running, visit [http://localhost:3000](http://localhost:3000) to view the site (Vite opens this URL automatically by default).
+
 ## Security Notes
 
 - API keys are stored in environment variables (`.env` file)
