@@ -5,6 +5,8 @@
  * 6개의 주요 서비스 영역으로 구성되어 있습니다.
  */
 
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
 import { Badge } from '../ui/badge';
@@ -17,6 +19,34 @@ import { servicesData } from '../../constants/services';
  * 업무분야 페이지의 메인 컴포넌트입니다.
  */
 export function ServicesPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  /**
+   * 홈 섹션에서 전달된 서비스 ID 상태를 감지해 해당 카드로 스크롤합니다.
+   * 스크롤 처리 후 replace 네비게이션으로 state를 비워 재실행을 방지합니다.
+   */
+  useEffect(() => {
+    const state = location.state as { targetServiceId?: number } | undefined;
+    if (!state?.targetServiceId) {
+      return;
+    }
+
+    const element = document.getElementById(`service-${state.targetServiceId}`);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+
+    navigate(location.pathname, { replace: true });
+  }, [location, navigate]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background pt-24 pb-20">
       <div className="container mx-auto px-4">

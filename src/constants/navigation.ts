@@ -14,10 +14,10 @@ import { NavigationItem } from '../types';
  *              배열의 순서가 실제 메뉴의 순서를 결정합니다.
  */
 export const navigationItems: NavigationItem[] = [
-  { id: 'home', label: '홈' },
-  { id: 'about', label: '회사소개' },
-  { id: 'services', label: '업무분야' },
-  { id: 'members', label: '구성원' },
-  { id: 'news', label: '뉴스/소식' },
-  { id: 'location', label: '오시는길' },
+  { id: 'home', label: '홈', path: '/' },
+  { id: 'about', label: '회사소개', path: '/about' },
+  { id: 'services', label: '업무분야', path: '/services' },
+  { id: 'members', label: '구성원', path: '/members' },
+  { id: 'news', label: '뉴스/소식', path: '/news' },
+  { id: 'location', label: '오시는길', path: '/location' },
 ];
