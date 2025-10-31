@@ -40,11 +40,12 @@ export function ExpertiseSection({ onNavigate }: ExpertiseSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredServices.map((service, index) => {
             const Icon = service.icon;
-            // 업무분야 페이지와 동일한 그라데이션 로직 사용
-            const iconGradient = index % 2 === 0 
-              ? `bg-gradient-to-br from-${service.color} to-chart-5` 
-              : `bg-gradient-to-br from-${service.color} to-chart-3`;
-            
+            const theme = service.theme;
+            const iconGradient =
+              index % 2 === 0
+                ? theme?.iconGradientPrimary ?? 'bg-gradient-to-br from-primary to-chart-5'
+                : theme?.iconGradientSecondary ?? 'bg-gradient-to-br from-primary to-chart-3';
+
             return (
               <motion.div
                 key={service.id}

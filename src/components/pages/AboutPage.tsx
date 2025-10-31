@@ -10,7 +10,6 @@
 
 import { motion } from 'framer-motion';
 import { Card } from '../ui/card';
-import { Badge } from '../ui/badge';
 import { Separator } from '../ui/separator';
 import { Lightbulb, Rocket, Users, Sparkles } from 'lucide-react';
 
@@ -46,6 +45,8 @@ export function AboutPage() {
       icon: Users,
     },
   ];
+  const iconBackgrounds = ['bg-chart-1/10', 'bg-chart-2/10', 'bg-chart-5/10'];
+  const iconAccentColors = ['text-chart-1', 'text-chart-2', 'text-chart-5'];
 
   return (
     <div className="min-h-screen pt-24 pb-20">
@@ -141,20 +142,12 @@ export function AboutPage() {
             </p>
           </div>
 
-          <div className="relative p-1 bg-gradient-to-r from-primary via-chart-1 to-chart-5 rounded-2xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 bg-background rounded-xl p-8">
+          <div className="relative p-1 rounded-2xl border border-border/30 bg-gradient-to-br from-background via-accent/10 to-background">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 bg-gradient-to-br from-background via-accent/5 to-background rounded-xl p-8">
               {knpItems.map((item, index) => {
                 const Icon = item.icon;
-                const gradients = [
-                  'from-white to-blue-500',
-                  'from-blue-500 to-red-500',
-                  'from-red-500 to-pink-500',
-                ];
-                const smallIconGradients = [
-                  'from-blue-400 to-blue-600',
-                  'from-red-400 to-red-600',
-                  'from-pink-400 to-pink-600',
-                ];
+                const iconBackground = iconBackgrounds[index] ?? 'bg-primary/5';
+                const accentColor = iconAccentColors[index] ?? 'text-primary';
                 return (
                   <motion.div
                     key={item.letter}
@@ -163,26 +156,29 @@ export function AboutPage() {
                     transition={{ delay: 0.7 + index * 0.15, duration: 0.6 }}
                     className="h-full"
                   >
-                    <Card className="p-6 lg:p-8 h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-transparent border border-border/20">
+                    <Card className="p-6 lg:p-8 h-full bg-gradient-to-br from-background via-accent/5 to-background border border-border/20 transition-all duration-300 hover:shadow-xl">
                       {/* 헤더 영역 */}
                       <div className="flex flex-col items-center text-center mb-6 pb-6 border-b border-border/20">
-                      <div className={`relative inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-r ${gradients[index]} mb-4 shadow-lg`}>
-                        <span className="text-3xl lg:text-4xl text-white">{item.letter}</span>
-                        <Icon className={`absolute -bottom-2 -right-2 w-6 h-6 lg:w-8 lg:h-8 text-white bg-gradient-to-br ${smallIconGradients[index]} rounded-full p-1.5 shadow-md`} />
+                        <div
+                          className={`relative inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-2xl ${iconBackground} mb-4 border border-border/30`}
+                        >
+                          <span className={`text-3xl lg:text-4xl font-semibold ${accentColor}`}>{item.letter}</span>
+                          <Icon
+                            className={`absolute -bottom-2 -right-2 w-6 h-6 lg:w-8 lg:h-8 ${accentColor} rounded-full p-1`}
+                          />
+                        </div>
+
+                        <h3 className="text-xl lg:text-2xl mb-2">{item.title}</h3>
+                        <p className="text-sm text-muted-foreground italic">
+                          {item.subtitle}
+                        </p>
                       </div>
-                      
-                      <h3 className="text-xl lg:text-2xl mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground italic">
-                        {item.subtitle}
-                      </p>
-                    </div>
 
-                    {/* 설명 영역 */}
-                    <div className="space-y-4">
-                      <p className="text-foreground/70 leading-relaxed text-sm lg:text-base">
-                        {item.description}
-                      </p>
-
+                      {/* 설명 영역 */}
+                      <div className="space-y-4">
+                        <p className="text-foreground/70 leading-relaxed text-sm lg:text-base">
+                          {item.description}
+                        </p>
                       </div>
                     </Card>
                   </motion.div>

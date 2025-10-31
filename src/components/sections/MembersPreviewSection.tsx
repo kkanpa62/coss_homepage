@@ -12,9 +12,9 @@ interface MembersPreviewSectionProps {
 }
 
 const AUTO_ROTATE_INTERVAL = 4000;
-const SECTION_TITLE = '\uAD6C\uC131\uC6D0';
+const SECTION_TITLE = '구성원';
 const SECTION_DESCRIPTION =
-  '\uAC01 \uBD84\uC57C \uCD5C\uACE0\uC758 \uC804\uBB38\uAC00\uB4E4\uC774 \uD568\uAED8\uD569\uB2C8\uB2E4.';
+  '각 분야 최고의 전문가들이 함께합니다.';
 
 export function MembersPreviewSection({ onMemberClick }: MembersPreviewSectionProps) {
   const displayMembers = useMemo(
@@ -107,7 +107,7 @@ export function MembersPreviewSection({ onMemberClick }: MembersPreviewSectionPr
                 )}
                 onClick={() => setActiveIndex(index)}
                 aria-current={index === activeIndex}
-                aria-label={`${member.name} \uBCF4\uAE30`}
+                aria-label={`${member.name} 보기`}
               />
             ))}
           </div>

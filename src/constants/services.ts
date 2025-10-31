@@ -18,6 +18,15 @@ export interface ServiceHighlight {
 /**
  * 서비스 데이터 타입
  */
+export interface ServiceTheme {
+  highlightTextClass: string;
+  backgroundClass: string;
+  iconGradientPrimary: string;
+  iconGradientSecondary: string;
+  rangeBackgroundClass: string;
+  badgeClass: string;
+}
+
 export interface ServiceData {
   id: number;
   icon: LucideIcon;
@@ -26,6 +35,7 @@ export interface ServiceData {
   color: string;
   highlights: ServiceHighlight[];
   services: string[];
+  theme: ServiceTheme;
 }
 
 /**
@@ -49,7 +59,15 @@ export const servicesData: ServiceData[] = [
       '특허 포트폴리오 구축 및 관리',
       '무효심판 및 정정심판',
       '특허 라이센싱 및 기술이전'
-    ]
+    ],
+    theme: {
+      highlightTextClass: 'text-chart-1',
+      backgroundClass: 'bg-gradient-to-br from-background via-chart-1/15 to-background',
+      iconGradientPrimary: 'bg-gradient-to-br from-chart-1 to-chart-5',
+      iconGradientSecondary: 'bg-gradient-to-br from-chart-1 to-chart-3',
+      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-1/20 to-background',
+      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+    },
   },
   {
     id: 2,
@@ -68,7 +86,15 @@ export const servicesData: ServiceData[] = [
       '표준 특허 풀 참여 지원',
       '표준 특허 가치 평가',
       '표준 특허 분쟁 대응'
-    ]
+    ],
+    theme: {
+      highlightTextClass: 'text-chart-2',
+      backgroundClass: 'bg-gradient-to-br from-background via-chart-2/15 to-background',
+      iconGradientPrimary: 'bg-gradient-to-br from-chart-2 to-chart-5',
+      iconGradientSecondary: 'bg-gradient-to-br from-chart-2 to-chart-3',
+      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-2/20 to-background',
+      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+    },
   },
   {
     id: 3,
@@ -87,7 +113,15 @@ export const servicesData: ServiceData[] = [
       '상표 갱신 및 관리',
       '상표 이의신청 및 취소심판',
       '상표권 침해 대응 및 소송'
-    ]
+    ],
+    theme: {
+      highlightTextClass: 'text-chart-3',
+      backgroundClass: 'bg-gradient-to-br from-background via-chart-3/15 to-background',
+      iconGradientPrimary: 'bg-gradient-to-br from-chart-3 to-chart-5',
+      iconGradientSecondary: 'bg-gradient-to-br from-chart-3 to-chart-1',
+      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-3/20 to-background',
+      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+    },
   },
   {
     id: 4,
@@ -106,7 +140,15 @@ export const servicesData: ServiceData[] = [
       'IP 실사(Due Diligence)',
       '기술이전 및 라이센싱 전략',
       'IP 교육 및 임직원 연수'
-    ]
+    ],
+    theme: {
+      highlightTextClass: 'text-chart-4',
+      backgroundClass: 'bg-gradient-to-br from-background via-chart-4/15 to-background',
+      iconGradientPrimary: 'bg-gradient-to-br from-chart-4 to-chart-5',
+      iconGradientSecondary: 'bg-gradient-to-br from-chart-4 to-chart-3',
+      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-4/20 to-background',
+      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+    },
   },
   {
     id: 5,
@@ -125,7 +167,15 @@ export const servicesData: ServiceData[] = [
       '디자인권 침해 분석 및 대응',
       '무효심판 및 권리범위확인심판',
       '헤이그 협정을 통한 해외 출원'
-    ]
+    ],
+    theme: {
+      highlightTextClass: 'text-chart-5',
+      backgroundClass: 'bg-gradient-to-br from-background via-chart-5/15 to-background',
+      iconGradientPrimary: 'bg-gradient-to-br from-chart-5 to-chart-1',
+      iconGradientSecondary: 'bg-gradient-to-br from-chart-5 to-chart-3',
+      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-5/20 to-background',
+      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+    },
   },
   {
     id: 6,
@@ -144,7 +194,15 @@ export const servicesData: ServiceData[] = [
       '권리범위확인심판',
       '손해배상 청구 소송',
       '대안적 분쟁 해결(ADR)'
-    ]
+    ],
+    theme: {
+      highlightTextClass: 'text-chart-1',
+      backgroundClass: 'bg-gradient-to-br from-background via-chart-1/15 to-background',
+      iconGradientPrimary: 'bg-gradient-to-br from-chart-1 to-chart-5',
+      iconGradientSecondary: 'bg-gradient-to-br from-chart-1 to-chart-3',
+      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-1/20 to-background',
+      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+    },
   }
 ];
 
