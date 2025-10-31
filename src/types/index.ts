@@ -25,7 +25,7 @@ export type PageType =
  * @property {string} name - 구성원의 이름
  * @property {string} position - 영문 이름 및 직책
  * @property {string} department - 소속 부서 또는 직급
- * @property {string} image - 프로필 이미지 경로 (public 디렉토리 기준)
+ * @property {MemberImages} images - 프로필 이미지 경로 모음 (public 디렉토리 기준)
  * @property {string} [bio] - 구성원의 약력 또는 소개 (선택 사항)
  * @property {string[]} [education] - 학력 사항 목록 (선택 사항)
  * @property {string[]} [experience] - 경력 사항 목록 (선택 사항)
@@ -36,11 +36,24 @@ export interface Member {
   name: string;
   position: string;
   department: string;
-  image: string;
+  images: MemberImages;
   bio?: string;
   education?: string[];
   experience?: string[];
   expertise?: string[];
+}
+
+/**
+ * @interface MemberImages
+ * @description 구성원 이미지 변형을 모아둔 객체입니다.
+ * @property {string} preview - 메인 페이지 프리뷰 섹션(768x768)에 사용될 이미지
+ * @property {string} list - 구성원 목록 카드(300x300)에 사용될 이미지
+ * @property {string} detail - 상세 페이지의 큰 이미지
+ */
+export interface MemberImages {
+  preview: string;
+  list: string;
+  detail: string;
 }
 
 /**

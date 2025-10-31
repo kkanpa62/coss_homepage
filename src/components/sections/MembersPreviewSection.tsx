@@ -17,10 +17,12 @@ const SECTION_DESCRIPTION =
   '각 분야 최고의 전문가들이 함께합니다.';
 
 export function MembersPreviewSection({ onMemberClick }: MembersPreviewSectionProps) {
-  const displayMembers = useMemo(
-    () => members.filter((member) => [1, 6, 7, 2, 5].includes(member.id)),
-    [],
-  );
+  const displayMembers = useMemo(() => {
+    const previewOrder = [1, 6, 7, 2, 5, 8];
+    return members
+      .filter((member) => previewOrder.includes(member.id))
+      .sort((a, b) => previewOrder.indexOf(a.id) - previewOrder.indexOf(b.id));
+  }, []);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -74,7 +76,7 @@ export function MembersPreviewSection({ onMemberClick }: MembersPreviewSectionPr
                   >
                     <div className="relative overflow-hidden aspect-[4/5]">
                       <ImageWithFallback
-                        src={currentMember.image}
+                        src={currentMember.images.preview}
                         alt={currentMember.name}
                         className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                       />
