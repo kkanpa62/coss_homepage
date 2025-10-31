@@ -45,8 +45,6 @@ interface LocationInfo {
   };
   /** @property {string} googleMapsApiKey - Google Maps Embed API에 사용될 API 키 */
   googleMapsApiKey: string;
-  /** @property {string} [mapStyleId] - Google Maps 스타일 ID (예: 다크 모드 테마) */
-  mapStyleId?: string;
 }
 
 /**
@@ -84,5 +82,4 @@ export const locationInfo: LocationInfo = {
    * 키가 없을 경우 빈 문자열을 반환하며, UI 컴포넌트에서 이를 처리합니다.
    */
   googleMapsApiKey: (import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string) || '',
-  mapStyleId: 'affa67138d1b2e28c065ae55',
 };
