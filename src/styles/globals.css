@@ -133,7 +133,7 @@
  * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
  */
 @layer base {
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+:where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
     h1 {
       font-size: var(--text-2xl);
       font-weight: var(--font-weight-medium);
@@ -181,6 +181,110 @@
       font-weight: var(--font-weight-normal);
       line-height: 1.5;
     }
+  }
+}
+
+/**
+ * Custom gradient helpers for chart colors that Tailwind 기본 유틸리티에 포함되지 않는 항목입니다.
+ * Tailwind의 CSS 변수 규칙을 따라 --tw-gradient-* 값을 수동으로 지정합니다.
+ */
+.from-chart-4 {
+  --tw-gradient-from: var(--chart-4);
+  --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+}
+
+.from-chart-4\/10 {
+  --tw-gradient-from: var(--chart-4);
+  --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .from-chart-4\/10 {
+    --tw-gradient-from: color-mix(in oklab, var(--chart-4) 10%, transparent);
+  }
+}
+
+.from-chart-5 {
+  --tw-gradient-from: var(--chart-5);
+  --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+}
+
+.from-chart-5\/10 {
+  --tw-gradient-from: var(--chart-5);
+  --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .from-chart-5\/10 {
+    --tw-gradient-from: color-mix(in oklab, var(--chart-5) 10%, transparent);
+  }
+}
+
+.via-chart-1\/15,
+.via-chart-1\/20,
+.via-chart-2\/15,
+.via-chart-2\/20,
+.via-chart-3\/15,
+.via-chart-3\/20,
+.via-chart-4\/15,
+.via-chart-4\/20,
+.via-chart-5\/15,
+.via-chart-5\/20 {
+  --tw-gradient-via: var(--chart-1);
+  --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-via-stops);
+}
+
+.via-chart-2\/15,
+.via-chart-2\/20 {
+  --tw-gradient-via: var(--chart-2);
+}
+
+.via-chart-3\/15,
+.via-chart-3\/20 {
+  --tw-gradient-via: var(--chart-3);
+}
+
+.via-chart-4\/15,
+.via-chart-4\/20 {
+  --tw-gradient-via: var(--chart-4);
+}
+
+.via-chart-5\/15,
+.via-chart-5\/20 {
+  --tw-gradient-via: var(--chart-5);
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .via-chart-1\/15 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-1) 15%, transparent);
+  }
+  .via-chart-1\/20 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-1) 20%, transparent);
+  }
+  .via-chart-2\/15 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-2) 15%, transparent);
+  }
+  .via-chart-2\/20 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-2) 20%, transparent);
+  }
+  .via-chart-3\/15 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-3) 15%, transparent);
+  }
+  .via-chart-3\/20 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-3) 20%, transparent);
+  }
+  .via-chart-4\/15 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-4) 15%, transparent);
+  }
+  .via-chart-4\/20 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-4) 20%, transparent);
+  }
+  .via-chart-5\/15 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-5) 15%, transparent);
+  }
+  .via-chart-5\/20 {
+    --tw-gradient-via: color-mix(in oklab, var(--chart-5) 20%, transparent);
   }
 }
 

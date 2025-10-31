@@ -66,7 +66,7 @@ export function HomePage() {
 
   return (
     <PageLayout>
-      <HeroSection onNavigate={handleNavigate} />
+      <HeroSection />
       <MembersPreviewSection onMemberClick={handleMemberClick} />
       <ExpertiseSection onNavigate={handleNavigate} />
       <ProjectsSection />

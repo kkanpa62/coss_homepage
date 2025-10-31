@@ -60,12 +60,19 @@ export function ServicesPage() {
         <div className="max-w-7xl mx-auto space-y-16">
           {servicesData.map((service, index) => {
             const Icon = service.icon;
-            const colorClass = `text-${service.color}`;
-            const bgGradient = `bg-gradient-to-br from-${service.color}/5 via-background to-background`;
-            const iconGradient = index % 2 === 0 
-              ? `bg-gradient-to-br from-${service.color} to-chart-5` 
-              : `bg-gradient-to-br from-${service.color} to-chart-3`;
-            
+            const theme = service.theme;
+            const highlightColor = theme?.highlightTextClass ?? 'text-primary';
+            const backgroundClass =
+              theme?.backgroundClass ?? 'bg-gradient-to-br from-primary via-background to-background';
+            const iconGradient =
+              index % 2 === 0
+                ? theme?.iconGradientPrimary ?? 'bg-gradient-to-br from-primary to-chart-5'
+                : theme?.iconGradientSecondary ?? 'bg-gradient-to-br from-primary to-chart-3';
+            const rangeBackground =
+              theme?.rangeBackgroundClass ?? 'bg-gradient-to-br from-background via-accent/10 to-background';
+            const badgeClass =
+              theme?.badgeClass ?? 'bg-background/85 text-foreground border border-border/30 hover:bg-background';
+
             return (
               <motion.div
                 key={service.id}
@@ -78,7 +85,7 @@ export function ServicesPage() {
                 <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300">
                   <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0`}>
                     {/* 좌측: 메인 정보 영역 */}
-                    <div className={bgGradient}>
+                    <div className={backgroundClass}>
                       <div className="p-8 lg:p-12">
                         {/* 아이콘 + 제목 통합 */}
                         <div className={`${iconGradient} flex items-center gap-5 px-8 py-5 rounded-full mb-8 shadow-lg w-full sm:w-3/4 lg:w-1/2`}>
@@ -97,7 +104,7 @@ export function ServicesPage() {
                         <div className="space-y-4">
                           {service.highlights.map((highlight, idx) => (
                             <div key={idx} className="flex items-start gap-3">
-                              <div className={`mt-1 flex-shrink-0 ${colorClass}`}>
+                              <div className={`mt-1 flex-shrink-0 ${highlightColor}`}>
                                 <CheckCircle2 className="w-5 h-5" />
                               </div>
                               <div className="flex-1 min-w-0">
@@ -113,7 +120,7 @@ export function ServicesPage() {
                     </div>
 
                     {/* 우측: 서비스 범위 영역 */}
-                    <div className="p-8 lg:p-12 bg-accent/30">
+                    <div className={`p-8 lg:p-12 ${rangeBackground} rounded-lg`}>
                       <div className="flex items-center gap-2 mb-6">
                         <div className={`${iconGradient} w-8 h-8 rounded-lg flex items-center justify-center`}>
                           <Sparkles className="w-5 h-5 text-white" />
@@ -131,8 +138,8 @@ export function ServicesPage() {
                             transition={{ delay: idx * 0.05, duration: 0.3 }}
                           >
                             <Badge 
-                              variant="secondary" 
-                              className="w-full py-3 px-4 justify-start hover:shadow-md transition-shadow"
+                              variant="outline" 
+                              className={`w-full py-3 px-4 justify-start transition-shadow ${badgeClass}`}
                             >
                               <span className="w-full text-left">{item}</span>
                             </Badge>

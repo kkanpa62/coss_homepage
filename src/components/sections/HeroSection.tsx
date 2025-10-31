@@ -12,18 +12,11 @@
 
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { PageType } from '../../types';
-
-interface HeroSectionProps {
-  onNavigate: (page: PageType) => void;  // 페이지 이동 핸들러
-}
 
 /**
  * HeroSection 컴포넌트
- * 
- * @param onNavigate - 버튼 클릭 시 실행될 페이지 이동 함수
  */
-export function HeroSection({ onNavigate }: HeroSectionProps) {
+export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* 장식용 배경 요소들 */}
