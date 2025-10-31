@@ -321,3 +321,25 @@ html {
   border-radius: 6px;
   border: 3px solid var(--card);
 }
+
+/**
+ * Carousel member item layout helper:
+ * - Mobile: 1 card
+ * - Tablet: 2 cards
+ * - Desktop: 3 cards
+ */
+.carousel-member-item {
+  flex: 0 0 100%;
+}
+
+@media (min-width: 640px) {
+  .carousel-member-item {
+    flex: 0 0 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-member-item {
+    flex: 0 0 33.333%;
+  }
+}

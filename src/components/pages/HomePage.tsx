@@ -7,7 +7,7 @@ import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageLayout } from '../layout/PageLayout';
 import { HeroSection } from '../sections/HeroSection';
-import { MembersPreviewSection } from '../sections/MembersPreviewSection';
+import { MembersCarouselSection } from '../sections/MembersCarouselSection';
 import { ExpertiseSection } from '../sections/ExpertiseSection';
 import { ProjectsSection } from '../sections/ProjectsSection';
 import { NavigationOptions, PageType } from '../../types';
@@ -67,7 +67,7 @@ export function HomePage() {
   return (
     <PageLayout>
       <HeroSection />
-      <MembersPreviewSection onMemberClick={handleMemberClick} />
+      <MembersCarouselSection onMemberClick={handleMemberClick} />
       <ExpertiseSection onNavigate={handleNavigate} />
       <ProjectsSection />
     </PageLayout>
