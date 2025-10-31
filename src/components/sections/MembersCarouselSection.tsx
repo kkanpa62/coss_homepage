@@ -33,7 +33,7 @@ export function MembersCarouselSection({ onMemberClick }: MembersCarouselSection
       <div className="container mx-auto px-4">
         <SectionHeader
           title="구성원"
-          description="각 분야 최고의 전문가들이 함께합니다. 자동으로 순환되는 갤러리에서 우리 팀을 만나보세요."
+          description="각 분야 최고의 전문가들이 함께합니다."
         />
 
         <Carousel
