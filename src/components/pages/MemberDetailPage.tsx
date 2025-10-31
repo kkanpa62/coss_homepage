@@ -54,7 +54,7 @@ export function MemberDetailPage({ member, onBack }: MemberDetailPageProps) {
                 {/* 프로필 이미지 */}
                 <div className="relative aspect-square">
                   <ImageWithFallback
-                    src={member.image}
+                    src={member.images.detail}
                     alt={member.name}
                     className="w-full h-full object-cover"
                   />

@@ -46,7 +46,7 @@ export function MembersPage({ onMemberClick }: MembersPageProps) {
                 {/* 프로필 이미지 영역 */}
                 <div className="relative overflow-hidden aspect-square">
                   <ImageWithFallback
-                    src={member.image}
+                    src={member.images.list}
                     alt={member.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />

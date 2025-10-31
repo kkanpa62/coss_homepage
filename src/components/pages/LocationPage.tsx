@@ -143,7 +143,7 @@ const MapErrorDisplay = ({ onRetry, canRetry, retriesLeft, fullAddress }: MapErr
  * @returns {JSX.Element}
  */
 function GoogleMap() {
-  const { address, googleMapsApiKey } = locationInfo;
+  const { address, googleMapsApiKey, mapStyleId } = locationInfo;
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
@@ -183,7 +183,16 @@ function GoogleMap() {
     );
   }
 
-  const embedUrl = `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=${encodeURIComponent(address.fullAddress)}`;
+  const params = new URLSearchParams({
+    key: googleMapsApiKey,
+    q: address.fullAddress,
+  });
+
+  if (mapStyleId) {
+    params.append('map_id', mapStyleId);
+  }
+
+  const embedUrl = `https://www.google.com/maps/embed/v1/place?${params.toString()}`;
 
   return (
     <div className="space-y-4">
