@@ -126,9 +126,9 @@ export const members: Member[] = [
     position: 'Choi, Chung Hon. Patent Attorney.',
     department: '변리사',
     images: {
-      preview: '/images/members/choi.png',
-      list: '/images/members/choi.png',
-      detail: '/images/members/choi.png',
+      preview: '/images/members/choichunghon_box-768x768.jpg',
+      list: '/images/members/choichunghon_box-300x300.jpg',
+      detail: '/images/members/choichunghon.jpg',
     },
     bio: '숭실대학교 의생명시스템학부 및 정보통계보험수리학 학사 출신으로, 생명공학, 생명정보학, 머신러닝/딥러닝 기술 분야의 특허 업무에 전문성을 갖춘 변리사입니다. 특허 컨설팅 및 국내외 특허 출원은 물론, 기술가치 평가 업무도 수행하고 있습니다.',
     education: ['숭실대 의생명시스템학부 학사', '숭실대 정보통계보험수리학과 학사'],

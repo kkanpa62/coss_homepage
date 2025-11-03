@@ -10,7 +10,7 @@ interface MembersCarouselSectionProps {
   onMemberClick?: (memberId: number) => void;
 }
 
-const CAROUSEL_ORDER = [1, 6, 7, 2, 5, 3, 4];
+const CAROUSEL_ORDER = [1, 6, 7, 2, 5, 3, 4, 8];
 
 export function MembersCarouselSection({ onMemberClick }: MembersCarouselSectionProps) {
   const autoplay = useRef<ReturnType<typeof Autoplay>>(
