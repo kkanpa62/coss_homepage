@@ -41,10 +41,7 @@ export function ExpertiseSection({ onNavigate }: ExpertiseSectionProps) {
           {featuredServices.map((service, index) => {
             const Icon = service.icon;
             const theme = service.theme;
-            const iconGradient =
-              index % 2 === 0
-                ? theme?.iconGradientPrimary ?? 'bg-gradient-to-br from-primary to-chart-5'
-                : theme?.iconGradientSecondary ?? 'bg-gradient-to-br from-primary to-chart-3';
+            const iconStyle = { background: theme.headerGradient };
 
             return (
               <motion.div
@@ -54,23 +51,26 @@ export function ExpertiseSection({ onNavigate }: ExpertiseSectionProps) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
-                <Card 
-                  className="p-6 h-full hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                <Card
+                  className="p-6 h-full border border-white/8 bg-gradient-to-br from-white/3 via-transparent to-transparent backdrop-blur-sm hover:shadow-xl transition-all duration-300 cursor-pointer group"
                   onClick={() => onNavigate('services', { serviceId: service.id })}
                 >
                   <div className="flex flex-col h-full">
                     {/* 아이콘 */}
-                    <div className={`w-14 h-14 rounded-xl ${iconGradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="w-7 h-7 text-white" />
+                    <div
+                      className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform duration-300"
+                      style={iconStyle}
+                    >
+                      <Icon className="w-7 h-7" />
                     </div>
-                    
+
                     {/* 제목 */}
-                    <h3 className="mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="mb-3 text-lg font-semibold text-white group-hover:text-primary transition-colors">
                       {service.title}
                     </h3>
-                    
+
                     {/* 설명 */}
-                    <p className="text-muted-foreground mb-4 flex-1 line-clamp-3">
+                    <p className="text-sm text-white/70 mb-4 flex-1 line-clamp-3">
                       {service.description}
                     </p>
 

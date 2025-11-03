@@ -8,10 +8,8 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Card } from '../ui/card';
-import { Badge } from '../ui/badge';
 import { SectionHeader } from '../common/SectionHeader';
-import { Sparkles, CheckCircle2 } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { servicesData } from '../../constants/services';
 
 /**
@@ -61,17 +59,22 @@ export function ServicesPage() {
           {servicesData.map((service, index) => {
             const Icon = service.icon;
             const theme = service.theme;
-            const highlightColor = theme?.highlightTextClass ?? 'text-primary';
-            const backgroundClass =
-              theme?.backgroundClass ?? 'bg-gradient-to-br from-primary via-background to-background';
-            const iconGradient =
-              index % 2 === 0
-                ? theme?.iconGradientPrimary ?? 'bg-gradient-to-br from-primary to-chart-5'
-                : theme?.iconGradientSecondary ?? 'bg-gradient-to-br from-primary to-chart-3';
-            const rangeBackground =
-              theme?.rangeBackgroundClass ?? 'bg-gradient-to-br from-background via-accent/10 to-background';
-            const badgeClass =
-              theme?.badgeClass ?? 'bg-background/85 text-foreground border border-border/30 hover:bg-background';
+            const leftCardStyle = {
+              background: theme.leftCardGradient,
+              borderColor: theme.leftCardBorderColor,
+            };
+            const headerStyle = { background: theme.headerGradient };
+            const iconStyle = { background: theme.iconGradient };
+            const descriptionStyle = { color: theme.descriptionColor };
+            const highlightTitleStyle = { color: theme.highlightTitleColor };
+            const highlightDescStyle = { color: theme.highlightDescriptionColor };
+            const bulletRingStyle = { borderColor: theme.bulletRingColor };
+            const bulletDotStyle = { background: theme.bulletDotColor };
+            const rightCardStyle = {
+              background: theme.rightCardGradient,
+              borderColor: theme.rightCardBorderColor,
+            };
+            const rightIconStyle = { background: theme.rightIconBackground };
 
             return (
               <motion.div
@@ -82,73 +85,74 @@ export function ServicesPage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300">
-                  <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0`}>
-                    {/* 좌측: 메인 정보 영역 */}
-                    <div className={backgroundClass}>
-                      <div className="p-8 lg:p-12">
-                        {/* 아이콘 + 제목 통합 */}
-                        <div className={`${iconGradient} flex items-center gap-5 px-8 py-5 rounded-full mb-8 shadow-lg w-full sm:w-3/4 lg:w-1/2`}>
-                          <div className="flex items-center justify-center w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex-shrink-0">
-                            <Icon className="w-7 h-7 text-white" />
-                          </div>
-                          <h2 className="text-white m-0 font-bold">{service.title}</h2>
-                        </div>
-                        
-                        {/* 설명 */}
-                        <p className="text-muted-foreground mb-8 leading-relaxed">
-                          {service.description}
-                        </p>
+                <div className="services-section">
+                  <div className="services-column services-column--left">
+                    <div className="services-card services-card--left" style={leftCardStyle}>
+                      <div className="services-card__glow services-card__glow--top" />
+                      <div className="services-card__glow services-card__glow--bottom" />
 
-                        {/* 주요 서비스 하이라이트 */}
-                        <div className="space-y-4">
-                          {service.highlights.map((highlight, idx) => (
-                            <div key={idx} className="flex items-start gap-3">
-                              <div className={`mt-1 flex-shrink-0 ${highlightColor}`}>
-                                <CheckCircle2 className="w-5 h-5" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h4 className="mb-1 break-keep">{highlight.title}</h4>
-                                <p className="text-muted-foreground">
-                                  {highlight.description}
-                                </p>
-                              </div>
-                            </div>
-                          ))}
+                      <div className="services-card__header" style={headerStyle}>
+                        <div className="services-card__icon" style={iconStyle}>
+                          <Icon className="services-card__icon-svg" />
                         </div>
+                        <span className="services-card__title">{service.title}</span>
+                      </div>
+
+                      <p className="services-card__description" style={descriptionStyle}>
+                        {service.description}
+                      </p>
+
+                      <div className="services-card__highlights">
+                        {service.highlights.map((highlight, idx) => (
+                          <div key={idx} className="services-card__highlight">
+                            <div className="services-card__bullet" style={bulletRingStyle}>
+                              <span className="services-card__bullet-dot" style={bulletDotStyle} />
+                            </div>
+                            <div className="services-card__highlight-text">
+                              <h4 className="services-card__highlight-title" style={highlightTitleStyle}>
+                                {highlight.title}
+                              </h4>
+                              <p className="services-card__highlight-desc" style={highlightDescStyle}>
+                                {highlight.description}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
+                  </div>
 
-                    {/* 우측: 서비스 범위 영역 */}
-                    <div className={`p-8 lg:p-12 ${rangeBackground} rounded-lg`}>
-                      <div className="flex items-center gap-2 mb-6">
-                        <div className={`${iconGradient} w-8 h-8 rounded-lg flex items-center justify-center`}>
-                          <Sparkles className="w-5 h-5 text-white" />
+                  <div className="services-column services-column--right">
+                    <div className="services-card services-card--right" style={rightCardStyle}>
+                      <div className="services-card__header services-card__header--right">
+                        <div className="services-card__icon services-card__icon--right" style={rightIconStyle}>
+                          <Sparkles className="services-card__icon-svg" />
                         </div>
-                        <h3>서비스 범위</h3>
+                        <h3 className="services-card__title services-card__title--right">서비스 범위</h3>
                       </div>
-                      
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+                      <div className="services-card__services">
                         {service.services.map((item, idx) => (
                           <motion.div
                             key={idx}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: idx * 0.05, duration: 0.3 }}
+                            transition={{ delay: idx * 0.04, duration: 0.3 }}
+                            className="services-card__service-item"
+                            style={{
+                              background: theme.serviceItemBackground,
+                              borderColor: theme.serviceItemBorderColor,
+                              color: theme.serviceItemTextColor,
+                            }}
                           >
-                            <Badge 
-                              variant="outline" 
-                              className={`w-full py-3 px-4 justify-start transition-shadow ${badgeClass}`}
-                            >
-                              <span className="w-full text-left">{item}</span>
-                            </Badge>
+                            {item}
                           </motion.div>
                         ))}
                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
               </motion.div>
             );
           })}

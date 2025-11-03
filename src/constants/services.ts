@@ -19,12 +19,21 @@ export interface ServiceHighlight {
  * 서비스 데이터 타입
  */
 export interface ServiceTheme {
-  highlightTextClass: string;
-  backgroundClass: string;
-  iconGradientPrimary: string;
-  iconGradientSecondary: string;
-  rangeBackgroundClass: string;
-  badgeClass: string;
+  leftCardGradient: string;
+  leftCardBorderColor: string;
+  headerGradient: string;
+  iconGradient: string;
+  descriptionColor: string;
+  highlightTitleColor: string;
+  highlightDescriptionColor: string;
+  bulletRingColor: string;
+  bulletDotColor: string;
+  rightCardGradient: string;
+  rightCardBorderColor: string;
+  rightIconBackground: string;
+  serviceItemBackground: string;
+  serviceItemBorderColor: string;
+  serviceItemTextColor: string;
 }
 
 export interface ServiceData {
@@ -61,12 +70,21 @@ export const servicesData: ServiceData[] = [
       '특허 라이센싱 및 기술이전'
     ],
     theme: {
-      highlightTextClass: 'text-chart-1',
-      backgroundClass: 'bg-gradient-to-br from-background via-chart-1/15 to-background',
-      iconGradientPrimary: 'bg-gradient-to-br from-chart-1 to-chart-5',
-      iconGradientSecondary: 'bg-gradient-to-br from-chart-1 to-chart-3',
-      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-1/20 to-background',
-      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+      leftCardGradient: 'linear-gradient(135deg, #2c1206 0%, #140704 100%)',
+      leftCardBorderColor: 'rgba(255,138,24,0.35)',
+      headerGradient: 'linear-gradient(135deg, #ffb347 0%, #ff7a18 100%)',
+      iconGradient: 'linear-gradient(135deg, rgba(255,212,128,0.9) 0%, rgba(255,122,24,0.9) 100%)',
+      descriptionColor: 'rgba(255,236,217,0.9)',
+      highlightTitleColor: 'rgba(255,248,236,0.95)',
+      highlightDescriptionColor: 'rgba(255,225,200,0.8)',
+      bulletRingColor: 'rgba(255,138,24,0.55)',
+      bulletDotColor: '#ff8a18',
+      rightCardGradient: 'linear-gradient(135deg, rgba(17,24,39,0.88) 0%, rgba(11,15,25,0.95) 100%)',
+      rightCardBorderColor: 'rgba(148,163,184,0.25)',
+      rightIconBackground: 'linear-gradient(135deg, rgba(255,138,24,0.25), rgba(255,122,24,0.08))',
+      serviceItemBackground: 'rgba(30,41,59,0.45)',
+      serviceItemBorderColor: 'rgba(100,116,139,0.35)',
+      serviceItemTextColor: 'rgba(226,232,240,0.92)',
     },
   },
   {
@@ -88,12 +106,21 @@ export const servicesData: ServiceData[] = [
       '표준 특허 분쟁 대응'
     ],
     theme: {
-      highlightTextClass: 'text-chart-2',
-      backgroundClass: 'bg-gradient-to-br from-background via-chart-2/15 to-background',
-      iconGradientPrimary: 'bg-gradient-to-br from-chart-2 to-chart-5',
-      iconGradientSecondary: 'bg-gradient-to-br from-chart-2 to-chart-3',
-      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-2/20 to-background',
-      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+      leftCardGradient: 'linear-gradient(135deg, #2c1b04 0%, #130902 100%)',
+      leftCardBorderColor: 'rgba(245,158,11,0.35)',
+      headerGradient: 'linear-gradient(135deg, #fde68a 0%, #f59e0b 100%)',
+      iconGradient: 'linear-gradient(135deg, rgba(253,230,138,0.9), rgba(245,158,11,0.9))',
+      descriptionColor: 'rgba(255,249,219,0.9)',
+      highlightTitleColor: 'rgba(255,250,210,0.95)',
+      highlightDescriptionColor: 'rgba(253,230,170,0.8)',
+      bulletRingColor: 'rgba(245,158,11,0.55)',
+      bulletDotColor: '#f59e0b',
+      rightCardGradient: 'linear-gradient(135deg, rgba(15,20,35,0.9) 0%, rgba(9,12,22,0.98) 100%)',
+      rightCardBorderColor: 'rgba(156,163,175,0.25)',
+      rightIconBackground: 'linear-gradient(135deg, rgba(245,158,11,0.25), rgba(245,158,11,0.07))',
+      serviceItemBackground: 'rgba(30,41,59,0.45)',
+      serviceItemBorderColor: 'rgba(148,163,184,0.32)',
+      serviceItemTextColor: 'rgba(226,232,240,0.9)',
     },
   },
   {
@@ -115,12 +142,21 @@ export const servicesData: ServiceData[] = [
       '상표권 침해 대응 및 소송'
     ],
     theme: {
-      highlightTextClass: 'text-chart-3',
-      backgroundClass: 'bg-gradient-to-br from-background via-chart-3/15 to-background',
-      iconGradientPrimary: 'bg-gradient-to-br from-chart-3 to-chart-5',
-      iconGradientSecondary: 'bg-gradient-to-br from-chart-3 to-chart-1',
-      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-3/20 to-background',
-      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+      leftCardGradient: 'linear-gradient(135deg, #06251c 0%, #02140d 100%)',
+      leftCardBorderColor: 'rgba(16,185,129,0.35)',
+      headerGradient: 'linear-gradient(135deg, #34d399 0%, #0ea5e9 100%)',
+      iconGradient: 'linear-gradient(135deg, rgba(52,211,153,0.9), rgba(14,165,233,0.9))',
+      descriptionColor: 'rgba(214,255,247,0.9)',
+      highlightTitleColor: 'rgba(214,255,237,0.95)',
+      highlightDescriptionColor: 'rgba(191,239,255,0.78)',
+      bulletRingColor: 'rgba(14,165,233,0.55)',
+      bulletDotColor: '#22c55e',
+      rightCardGradient: 'linear-gradient(135deg, rgba(16,25,37,0.9) 0%, rgba(8,13,26,0.98) 100%)',
+      rightCardBorderColor: 'rgba(56,189,248,0.28)',
+      rightIconBackground: 'linear-gradient(135deg, rgba(14,165,233,0.25), rgba(14,165,233,0.07))',
+      serviceItemBackground: 'rgba(17,25,40,0.55)',
+      serviceItemBorderColor: 'rgba(56,189,248,0.35)',
+      serviceItemTextColor: 'rgba(226,232,240,0.9)',
     },
   },
   {
@@ -142,12 +178,21 @@ export const servicesData: ServiceData[] = [
       'IP 교육 및 임직원 연수'
     ],
     theme: {
-      highlightTextClass: 'text-chart-4',
-      backgroundClass: 'bg-gradient-to-br from-background via-chart-4/15 to-background',
-      iconGradientPrimary: 'bg-gradient-to-br from-chart-4 to-chart-5',
-      iconGradientSecondary: 'bg-gradient-to-br from-chart-4 to-chart-3',
-      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-4/20 to-background',
-      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+      leftCardGradient: 'linear-gradient(135deg, #1b102f 0%, #0c0517 100%)',
+      leftCardBorderColor: 'rgba(129,140,248,0.32)',
+      headerGradient: 'linear-gradient(135deg, #a855f7 0%, #6366f1 100%)',
+      iconGradient: 'linear-gradient(135deg, rgba(168,85,247,0.9), rgba(99,102,241,0.9))',
+      descriptionColor: 'rgba(233,231,255,0.9)',
+      highlightTitleColor: 'rgba(224,231,255,0.95)',
+      highlightDescriptionColor: 'rgba(196,181,253,0.78)',
+      bulletRingColor: 'rgba(129,140,248,0.6)',
+      bulletDotColor: '#a855f7',
+      rightCardGradient: 'linear-gradient(135deg, rgba(18,23,45,0.92) 0%, rgba(10,13,26,0.98) 100%)',
+      rightCardBorderColor: 'rgba(129,140,248,0.3)',
+      rightIconBackground: 'linear-gradient(135deg, rgba(129,140,248,0.28), rgba(99,102,241,0.08))',
+      serviceItemBackground: 'rgba(21,24,45,0.55)',
+      serviceItemBorderColor: 'rgba(129,140,248,0.35)',
+      serviceItemTextColor: 'rgba(228,233,255,0.92)',
     },
   },
   {
@@ -169,12 +214,21 @@ export const servicesData: ServiceData[] = [
       '헤이그 협정을 통한 해외 출원'
     ],
     theme: {
-      highlightTextClass: 'text-chart-5',
-      backgroundClass: 'bg-gradient-to-br from-background via-chart-5/15 to-background',
-      iconGradientPrimary: 'bg-gradient-to-br from-chart-5 to-chart-1',
-      iconGradientSecondary: 'bg-gradient-to-br from-chart-5 to-chart-3',
-      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-5/20 to-background',
-      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+      leftCardGradient: 'linear-gradient(135deg, #311405 0%, #170701 100%)',
+      leftCardBorderColor: 'rgba(249,115,22,0.35)',
+      headerGradient: 'linear-gradient(135deg, #fbbf24 0%, #f97316 100%)',
+      iconGradient: 'linear-gradient(135deg, rgba(251,191,36,0.9), rgba(249,115,22,0.9))',
+      descriptionColor: 'rgba(255,243,222,0.9)',
+      highlightTitleColor: 'rgba(254,243,199,0.95)',
+      highlightDescriptionColor: 'rgba(253,230,138,0.78)',
+      bulletRingColor: 'rgba(249,115,22,0.55)',
+      bulletDotColor: '#f97316',
+      rightCardGradient: 'linear-gradient(135deg, rgba(17,24,39,0.88) 0%, rgba(11,15,25,0.96) 100%)',
+      rightCardBorderColor: 'rgba(251,191,36,0.28)',
+      rightIconBackground: 'linear-gradient(135deg, rgba(249,115,22,0.25), rgba(249,115,22,0.08))',
+      serviceItemBackground: 'rgba(30,41,59,0.45)',
+      serviceItemBorderColor: 'rgba(250,204,21,0.3)',
+      serviceItemTextColor: 'rgba(255,247,220,0.92)',
     },
   },
   {
@@ -196,12 +250,21 @@ export const servicesData: ServiceData[] = [
       '대안적 분쟁 해결(ADR)'
     ],
     theme: {
-      highlightTextClass: 'text-chart-1',
-      backgroundClass: 'bg-gradient-to-br from-background via-chart-1/15 to-background',
-      iconGradientPrimary: 'bg-gradient-to-br from-chart-1 to-chart-5',
-      iconGradientSecondary: 'bg-gradient-to-br from-chart-1 to-chart-3',
-      rangeBackgroundClass: 'bg-gradient-to-br from-background via-chart-1/20 to-background',
-      badgeClass: 'bg-background/85 text-foreground border border-border/30 hover:bg-background',
+      leftCardGradient: 'linear-gradient(135deg, #300812 0%, #170309 100%)',
+      leftCardBorderColor: 'rgba(244,63,94,0.4)',
+      headerGradient: 'linear-gradient(135deg, #fb7185 0%, #f43f5e 100%)',
+      iconGradient: 'linear-gradient(135deg, rgba(251,113,133,0.9), rgba(244,63,94,0.9))',
+      descriptionColor: 'rgba(255,229,235,0.9)',
+      highlightTitleColor: 'rgba(255,239,241,0.96)',
+      highlightDescriptionColor: 'rgba(254,205,211,0.8)',
+      bulletRingColor: 'rgba(244,63,94,0.55)',
+      bulletDotColor: '#f43f5e',
+      rightCardGradient: 'linear-gradient(135deg, rgba(19,20,37,0.92) 0%, rgba(10,11,24,0.98) 100%)',
+      rightCardBorderColor: 'rgba(248,113,113,0.28)',
+      rightIconBackground: 'linear-gradient(135deg, rgba(244,63,94,0.25), rgba(244,63,94,0.07))',
+      serviceItemBackground: 'rgba(31,35,56,0.52)',
+      serviceItemBorderColor: 'rgba(248,113,113,0.32)',
+      serviceItemTextColor: 'rgba(255,228,230,0.9)',
     },
   }
 ];
