@@ -423,6 +423,20 @@ a:hover .text-link__arrow {
   display: none;
 }
 
+/* 마우스로 끌 수 있음을 커서로 알립니다(터치 기기는 제외) */
+@media (hover: hover) and (pointer: fine) {
+  .scroll-rail__track {
+    cursor: grab;
+    user-select: none;
+  }
+}
+
+/* 끄는 동안: 스냅을 꺼서 손을 따라 움직이게 하고, 손을 떼면 다시 켜져 가까운 카드에 맞춰집니다 */
+.scroll-rail__track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
 .scroll-rail__item {
   flex: 0 0 var(--rail-item);
   scroll-snap-align: start;
@@ -435,18 +449,34 @@ a:hover .text-link__arrow {
   margin-top: 28px;
 }
 
+.scroll-rail__controls[hidden] {
+  display: none;
+}
+
+/* 위치 막대: 선은 가늘게, 잡는 영역은 위아래로 넉넉하게 */
 .scroll-rail__bar {
   flex: 1;
+  padding: 12px 0;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.scroll-rail__line {
   height: 1px;
   overflow: hidden;
   background: var(--line);
+  transition: height 0.15s;
+}
+
+.scroll-rail__bar:hover .scroll-rail__line,
+.scroll-rail__bar:active .scroll-rail__line {
+  height: 3px;
 }
 
 .scroll-rail__thumb {
   display: block;
   height: 100%;
   background: var(--fg);
-  transition: transform 0.15s linear;
 }
 
 .scroll-rail__buttons {
