@@ -5,7 +5,29 @@
  * @exports members - Member 타입의 배열로 구성된 전체 구성원 데이터
  */
 
-import { Member } from '../types';
+import { Member, PageIntro } from '../types';
+
+/**
+ * @constant membersIntro
+ * @description 구성원 페이지 머리 문구입니다.
+ */
+export const membersIntro: PageIntro = {
+  eyebrow: 'Members',
+  title: ['구성원'],
+  description: 'COSS KNP GROUP의 전문가들을 소개합니다',
+};
+
+/**
+ * @constant memberDetailLabels
+ * @description 구성원 상세 페이지의 항목 제목과 목록으로 돌아가는 링크 문구입니다.
+ */
+export const memberDetailLabels = {
+  back: '구성원 목록으로',
+  bio: '소개',
+  education: '학력',
+  experience: '경력',
+  expertise: '전문 분야',
+};
 
 /**
  * @constant members

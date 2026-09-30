@@ -1,73 +1,26 @@
 /**
  * Hero 섹션 컴포넌트 (홈페이지용)
- * 
- * 홈페이지 최상단에 표시되는 메인 비주얼 영역입니다.
- * 회사의 핵심 메시지와 브랜드 아이덴티티를 전달합니다.
- * 
- * 주요 기능:
- * - 그라데이션 배경과 장식 요소로 시각적 임팩트 제공
- * - 메인 타이틀, 서브 타이틀 애니메이션
- * - 스크롤 다운 인디케이터
+ *
+ * 홈페이지 최상단 — 스크램블 메인 타이틀, 서브 타이틀, 스크롤 안내.
  */
 
-import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { heroContent } from '../../constants/home';
+import { labels } from '../../constants/labels';
+import { ScrambleText } from '../common/ScrambleText';
 
-/**
- * HeroSection 컴포넌트
- */
+/** 스크롤 안내가 가리키는 첫 섹션의 id */
+export const HOME_FIRST_SECTION_ID = 'home-members';
+
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* 장식용 배경 요소들 */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-chart-1/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-chart-5/10 rounded-full blur-3xl" />
-      </div>
-
-      {/* 메인 콘텐츠 */}
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          {/* 메인 타이틀 */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mb-6 text-5xl sm:text-6xl md:text-7xl"
-          >
-            인공지능으로
-            <br />
-            <span className="bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent">
-              미래를 설계합니다
-            </span>
-          </motion.h1>
-
-          {/* 서브 타이틀 */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="mb-8 text-muted-foreground max-w-2xl mx-auto text-lg"
-          >
-            고도화된 AI 기술력과 풍부한 실무 경험으로 고객의 성장 동력을 확보하고
-            차별화된 지식재산 솔루션을 선사합니다.
-          </motion.p>
-
-          {/* 스크롤 다운 인디케이터 */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="mt-16"
-          >
-            <ChevronDown className="w-6 h-6 mx-auto text-muted-foreground animate-bounce" />
-          </motion.div>
-        </motion.div>
+    <section className="hero">
+      <div className="container">
+        <p className="eyebrow">{heroContent.eyebrow}</p>
+        <ScrambleText as="h1" lines={heroContent.title} className="hero__title" duration={1800} />
+        <p className="hero__description">{heroContent.description}</p>
+        <a href={`#${HOME_FIRST_SECTION_ID}`} className="hero__cue" aria-label={labels.scrollDown}>
+          ↓
+        </a>
       </div>
     </section>
   );

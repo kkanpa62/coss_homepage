@@ -4,6 +4,8 @@
  * @exports locationInfo - 위치 및 연락처 정보를 담고 있는 객체
  */
 
+import { PageIntro } from '../types';
+
 /**
  * @interface LocationInfo
  * @description locationInfo 객체의 데이터 구조를 정의하는 타입입니다.
@@ -83,3 +85,29 @@ export const locationInfo: LocationInfo = {
    */
   googleMapsApiKey: (import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string) || '',
 };
+
+/**
+ * @constant locationIntro
+ * @description 오시는길 페이지 머리 문구입니다.
+ */
+export const locationIntro: PageIntro = {
+  eyebrow: 'Location',
+  title: ['오시는길'],
+};
+
+/**
+ * @constant contactLabels
+ * @description 오시는길 연락처 묶음의 제목입니다.
+ */
+export const contactLabels = {
+  address: '주소',
+  phone: '전화번호',
+  email: '이메일',
+  postalCode: '우편번호',
+};
+
+/**
+ * @constant googleMapsSearchUrl
+ * @description 전체 주소로 구글맵 검색 페이지를 여는 URL입니다.
+ */
+export const googleMapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationInfo.address.fullAddress)}`;

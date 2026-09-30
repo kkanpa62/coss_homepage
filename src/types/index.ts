@@ -7,16 +7,36 @@
 /**
  * @type PageType
  * @description 웹사이트의 모든 페이지 종류를 나타내는 식별자입니다.
- *              App.tsx의 라우팅 로직과 Navigation 컴포넌트에서 사용됩니다.
  */
-export type PageType = 
+export type PageType =
   | 'home'
   | 'about'
   | 'services'
   | 'members'
   | 'news'
-  | 'location'
-  | 'member-detail';
+  | 'location';
+
+/**
+ * @interface PageIntro
+ * @description 하위 페이지 상단(PageHeader)에 표시되는 문구입니다.
+ * @property {string} [eyebrow] - 제목 위 작은 영문 라벨
+ * @property {string[]} title - 제목(한 줄씩)
+ * @property {string} [description] - 제목 아래 설명
+ */
+export interface PageIntro {
+  eyebrow?: string;
+  title: string[];
+  description?: string;
+}
+
+/**
+ * @interface SectionIntro
+ * @description 홈 섹션 머리(SectionHeader)에 표시되는 문구입니다.
+ */
+export interface SectionIntro {
+  title: string;
+  description?: string;
+}
 
 /**
  * @interface Member
@@ -46,7 +66,7 @@ export interface Member {
 /**
  * @interface MemberImages
  * @description 구성원 이미지 변형을 모아둔 객체입니다.
- * @property {string} preview - 메인 페이지 프리뷰 섹션(768x768)에 사용될 이미지
+ * @property {string} preview - 홈 구성원 섹션(768x768)에 사용될 이미지
  * @property {string} list - 구성원 목록 카드(300x300)에 사용될 이미지
  * @property {string} detail - 상세 페이지의 큰 이미지
  */
@@ -67,13 +87,4 @@ export interface NavigationItem {
   id: PageType;
   label: string;
   path: string;
-}
-
-/**
- * @interface NavigationOptions
- * @description 페이지 이동 함수(`handleNavigate`)에 전달될 수 있는 추가 옵션입니다.
- * @property {number} [serviceId] - '업무분야' 페이지로 이동 시, 특정 서비스 섹션으로 스크롤하기 위한 ID (선택 사항)
- */
-export interface NavigationOptions {
-  serviceId?: number;
 }

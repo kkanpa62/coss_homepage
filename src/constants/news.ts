@@ -4,6 +4,17 @@
  * 뉴스/소식 페이지에서 사용되는 최신 뉴스 정보를 관리합니다.
  */
 
+import { PageIntro } from '../types';
+
+/**
+ * 뉴스/소식 페이지 머리 문구
+ */
+export const newsIntro: PageIntro = {
+  eyebrow: 'News',
+  title: ['뉴스 / 소식'],
+  description: 'COSS KNP GROUP의 최신 소식과 지식재산권 업계 동향을 확인하세요',
+};
+
 export interface NewsItem {
   id: number;
   title: string;

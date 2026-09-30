@@ -1,150 +1,64 @@
 /**
  * 구성원 상세 페이지 컴포넌트
- * 
- * 선택된 구성원의 상세 정보를 표시합니다.
- * 프로필 이미지, 소개, 학력, 경력, 전문 분야 등을 포함합니다.
+ *
+ * 프로필(사진·이름·영문 직함·직급)과 소개·학력·경력·전문 분야를 표시합니다. 없는 항목은 생략합니다.
  */
 
-import { motion } from 'framer-motion';
-import { Card } from '../ui/card';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
-import { ArrowLeft, GraduationCap, Briefcase, Award } from 'lucide-react';
+import { Award, Briefcase, GraduationCap, UserRound } from 'lucide-react';
+import { memberDetailLabels } from '../../constants/members';
 import { Member } from '../../types';
+import { DetailRow, PlainList } from '../common/DetailRow';
+import { ImageWithFallback } from '../common/ImageWithFallback';
+import { ScrambleText } from '../common/ScrambleText';
+import { TagList } from '../common/Tag';
+import { TextLink } from '../common/TextLink';
 
-interface MemberDetailPageProps {
-  member: Member;    // 표시할 구성원 정보
-  onBack: () => void; // 뒤로 가기 핸들러
-}
-
-/**
- * MemberDetailPage 컴포넌트
- * 
- * @param member - 표시할 구성원 데이터
- * @param onBack - 구성원 목록으로 돌아가는 함수
- */
-export function MemberDetailPage({ member, onBack }: MemberDetailPageProps) {
+export function MemberDetailPage({ member }: { member: Member }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-chart-2/5 to-background pt-24 pb-20">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* 뒤로 가기 버튼 */}
-          <Button
-            variant="ghost"
-            onClick={onBack}
-            className="mb-6 gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            구성원 목록으로
-          </Button>
+    <>
+      <p className="member-detail__back">
+        <TextLink to="/members" arrow="←">
+          {memberDetailLabels.back}
+        </TextLink>
+      </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* 좌측: 프로필 카드 (스크롤 시 고정) */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <Card className="overflow-hidden sticky top-24">
-                {/* 프로필 이미지 */}
-                <div className="relative aspect-square">
-                  <ImageWithFallback
-                    src={member.images.detail}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                </div>
-                
-                {/* 기본 정보 */}
-                <div className="p-6">
-                  <h2 className="mb-2">{member.name}</h2>
-                  <p className="text-muted-foreground mb-1">{member.position}</p>
-                  <p className="text-muted-foreground">{member.department}</p>
-                </div>
-              </Card>
-            </motion.div>
-
-            {/* 우측: 상세 정보 영역 */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="lg:col-span-2 space-y-6"
-            >
-              {/* 소개 섹션 */}
-              <Card className="p-6">
-                <h3 className="mb-4">소개</h3>
-                <p className="text-muted-foreground leading-relaxed">{member.bio}</p>
-              </Card>
-
-              {/* 학력 섹션 (있는 경우에만 표시) */}
-              {member.education && (
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-chart-3/10 flex items-center justify-center">
-                      <GraduationCap className="w-5 h-5 text-chart-3" />
-                    </div>
-                    <h3>학력</h3>
-                  </div>
-                  <ul className="space-y-2">
-                    {member.education.map((edu, index) => (
-                      <li key={index} className="text-muted-foreground flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
-                        <span>{edu}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              )}
-
-              {/* 경력 섹션 (있는 경우에만 표시) */}
-              {member.experience && (
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-chart-4/10 flex items-center justify-center">
-                      <Briefcase className="w-5 h-5 text-chart-4" />
-                    </div>
-                    <h3>경력</h3>
-                  </div>
-                  <ul className="space-y-2">
-                    {member.experience.map((exp, index) => (
-                      <li key={index} className="text-muted-foreground flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
-                        <span>{exp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              )}
-
-              {/* 전문 분야 섹션 (있는 경우에만 표시) */}
-              {member.expertise && (
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-chart-5/10 flex items-center justify-center">
-                      <Award className="w-5 h-5 text-chart-5" />
-                    </div>
-                    <h3>전문 분야</h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {member.expertise.map((skill, index) => (
-                      <Badge key={index} variant="secondary">
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </Card>
-              )}
-            </motion.div>
+      <div className="member-detail">
+        {/* 좌측: 프로필 (넓은 화면에서 스크롤 시 고정) */}
+        <div className="member-detail__profile">
+          <figure className="member-detail__figure">
+            <ImageWithFallback src={member.images.detail} alt={member.name} loading="eager" />
+          </figure>
+          <div>
+            <ScrambleText as="h1" lines={[member.name]} className="member-detail__name" duration={1000} />
+            <p className="member-detail__position">{member.position}</p>
+            <p className="member-detail__department">{member.department}</p>
           </div>
-        </motion.div>
+        </div>
+
+        {/* 우측: 상세 정보 */}
+        <div className="member-detail__body">
+          {member.bio && (
+            <DetailRow label={memberDetailLabels.bio} icon={<UserRound aria-hidden="true" />}>
+              <p className="member-detail__bio">{member.bio}</p>
+            </DetailRow>
+          )}
+          {member.education && (
+            <DetailRow label={memberDetailLabels.education} icon={<GraduationCap aria-hidden="true" />}>
+              <PlainList items={member.education} />
+            </DetailRow>
+          )}
+          {member.experience && (
+            <DetailRow label={memberDetailLabels.experience} icon={<Briefcase aria-hidden="true" />}>
+              <PlainList items={member.experience} />
+            </DetailRow>
+          )}
+          {member.expertise && (
+            <DetailRow label={memberDetailLabels.expertise} icon={<Award aria-hidden="true" />}>
+              <TagList items={member.expertise} />
+            </DetailRow>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

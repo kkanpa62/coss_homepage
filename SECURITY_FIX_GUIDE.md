@@ -4,7 +4,7 @@
 
 GitHub 레포지토리가 public으로 전환되면서 `src/constants/location.ts` 파일에 하드코딩된 Google Maps API 키가 공개되었습니다.
 
-**노출된 API 키:** `AIzaSyCqPIOLnMxToQm-T8Fl4avdHpej4xQHq_o`
+**노출된 API 키:** `AIzaSy…(가림 처리 — 폐기된 키)`
 
 ## 즉시 취해야 할 조치
 
@@ -39,7 +39,7 @@ VITE_GOOGLE_MAPS_API_KEY=새로_생성한_API_키
 java -jar bfg.jar --replace-text passwords.txt
 
 # passwords.txt 파일 내용:
-# AIzaSyCqPIOLnMxToQm-T8Fl4avdHpej4xQHq_o
+# AIzaSy…(가림 처리 — 폐기된 키)
 
 # Git 정리
 git reflog expire --expire=now --all
@@ -53,7 +53,7 @@ git gc --prune=now --aggressive
 pip install git-filter-repo
 
 # API 키 제거
-git filter-repo --replace-text <(echo 'AIzaSyCqPIOLnMxToQm-T8Fl4avdHpej4xQHq_o==>REMOVED_API_KEY')
+git filter-repo --replace-text <(echo 'AIzaSy…(가림 처리 — 폐기된 키)==>REMOVED_API_KEY')
 ```
 
 #### 옵션 C: 간단한 방법 - 새 레포지토리로 시작

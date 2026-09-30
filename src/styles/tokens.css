@@ -1,0 +1,41 @@
+/**
+ * 디자인 토큰 — 색·글꼴·폭.
+ * 테마는 html[data-theme="light" | "dark"]로 전환합니다(기본 light, index.html에서 첫 화면 전에 적용).
+ */
+
+:root {
+  color-scheme: light;
+
+  /* 색 (밝은 테마, 기본) */
+  --bg: #e8e6e3;
+  --fg: #1d1b19;
+  --muted: #6b665f;
+  --kbd-bg: #d3d0cb;
+  --kbd-fg: #2e2b28;
+  --accent: #b8621c;
+  --line: color-mix(in srgb, var(--fg) 12%, transparent);
+  --line-strong: color-mix(in srgb, var(--fg) 24%, transparent);
+  --surface: color-mix(in srgb, var(--fg) 4%, transparent);
+
+  /* 글꼴: 라틴 글자는 앞 글꼴, 한글은 뒤 글꼴로 채워집니다 */
+  --font-serif: "EB Garamond", "Noto Serif KR", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Nanum Gothic Coding", ui-monospace, monospace;
+
+  /* 폭·간격 */
+  --measure: 620px;
+  --wide: 1080px;
+  --gutter: 20px;
+  --header-h: 64px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b0a0a;
+  --fg: #e9e6e1;
+  --muted: #8a857e;
+  --kbd-bg: #2a2826;
+  --kbd-fg: #cfcac3;
+  --accent: #f0a860;
+}
