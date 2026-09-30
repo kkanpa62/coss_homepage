@@ -17,8 +17,8 @@
   --line-strong: color-mix(in srgb, var(--fg) 24%, transparent);
   --surface: color-mix(in srgb, var(--fg) 4%, transparent);
 
-  /* 글꼴: 라틴 글자는 앞 글꼴, 한글은 뒤 글꼴로 채워집니다 */
-  --font-serif: "EB Garamond", "Noto Serif KR", Georgia, serif;
+  /* 글꼴: 본문은 Pretendard, 제목·라벨은 모노(라틴은 JetBrains Mono, 한글은 나눔고딕코딩) */
+  --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono: "JetBrains Mono", "Nanum Gothic Coding", ui-monospace, monospace;
 
   /* 폭·간격 */

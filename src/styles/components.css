@@ -142,8 +142,8 @@
   align-items: baseline;
   gap: 16px;
   padding: 10px 0;
-  font-family: var(--font-mono);
   font-size: 24px;
+  font-weight: 500;
   color: var(--muted);
   text-decoration: none;
   border-bottom: 1px solid var(--line);

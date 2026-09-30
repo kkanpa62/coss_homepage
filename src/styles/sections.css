@@ -125,7 +125,6 @@
 .member-card__position {
   margin-top: 2px;
   font-size: 15px;
-  font-style: italic;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -180,7 +179,6 @@
 
 .member-detail__position {
   margin-top: 6px;
-  font-style: italic;
   color: var(--muted);
 }
 
@@ -526,7 +524,6 @@
 
 .about-knp__subtitle {
   margin-top: 8px;
-  font-style: italic;
   color: var(--muted);
 }
 
@@ -568,7 +565,6 @@
 
 .knp-item__subtitle {
   margin-top: 2px;
-  font-style: italic;
   color: var(--muted);
 }
 
