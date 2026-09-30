@@ -12,4 +12,6 @@ export const labels = {
   mainMenu: '주 메뉴',
   scrollDown: '아래로 스크롤',
   serviceIndex: '업무분야 바로가기',
+  railPrev: '이전 항목 보기',
+  railNext: '다음 항목 보기',
 };
