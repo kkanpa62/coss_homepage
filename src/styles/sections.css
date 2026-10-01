@@ -122,6 +122,16 @@
   transform: none;
 }
 
+/* 이름 읽는 법(일본어 페이지의 한자 이름 아래 가타카나) */
+.member-card__reading,
+.member-detail__reading {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
 .member-card__position {
   margin-top: 2px;
   font-size: 15px;

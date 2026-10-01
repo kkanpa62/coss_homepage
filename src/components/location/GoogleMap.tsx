@@ -1,11 +1,13 @@
 /**
  * @file GoogleMap.tsx
  * @description Google Maps를 iframe으로 임베드하고, 로딩·오류·API 키 없음 상태를 표시합니다.
+ *              지도 안 글자도 현재 언어로 보이도록 language 값을 함께 넘깁니다.
  */
 
 import { ReactNode, useCallback, useState } from 'react';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 import { googleMapsSearchUrl, locationInfo } from '../../constants/location';
+import { useI18n } from '../../i18n/I18nProvider';
 import { TextLink } from '../common/TextLink';
 
 const MAX_RETRIES = 2;
@@ -27,6 +29,8 @@ function MapNotice({ title, message, children }: { title: string; message: strin
 }
 
 export function GoogleMap() {
+  const { locale, content } = useI18n();
+  const text = content.location.map;
   const { address, googleMapsApiKey } = locationInfo;
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState(false);
@@ -52,28 +56,25 @@ export function GoogleMap() {
 
   const renderMap = () => {
     if (!googleMapsApiKey) {
-      return <MapNotice title="지도 로딩 실패" message="Google Maps API 키가 설정되지 않았습니다." />;
+      return <MapNotice title={text.missingKeyTitle} message={text.missingKeyMessage} />;
     }
 
     if (mapError) {
       return (
-        <MapNotice
-          title="지도 로딩 중 오류"
-          message="Google Maps를 표시할 수 없습니다. 인터넷 연결이나 API 키 설정을 확인해주세요."
-        >
+        <MapNotice title={text.errorTitle} message={text.errorMessage}>
           <div className="map__actions">
             {retryCount < MAX_RETRIES && (
               <button type="button" className="map__retry" onClick={handleRetry}>
-                <RefreshCw aria-hidden="true" width={13} height={13} /> 다시 시도 ({MAX_RETRIES - retryCount})
+                <RefreshCw aria-hidden="true" width={13} height={13} /> {text.retry} ({MAX_RETRIES - retryCount})
               </button>
             )}
-            <TextLink href={googleMapsSearchUrl}>구글맵에서 보기</TextLink>
+            <TextLink href={googleMapsSearchUrl}>{text.openInMaps}</TextLink>
           </div>
         </MapNotice>
       );
     }
 
-    const params = new URLSearchParams({ key: googleMapsApiKey, q: address.fullAddress });
+    const params = new URLSearchParams({ key: googleMapsApiKey, q: address.mapQuery, language: locale });
 
     return (
       <>
@@ -81,18 +82,18 @@ export function GoogleMap() {
           <div className="map__state">
             <div>
               <div className="map__spinner" />
-              <p>지도를 불러오는 중...</p>
+              <p>{text.loading}</p>
             </div>
           </div>
         )}
         <iframe
-          key={retryCount} // 재시도 시 iframe을 강제로 리렌더링
+          key={`${locale}-${retryCount}`} // 재시도·언어 변경 시 iframe을 새로 그립니다
           src={`https://www.google.com/maps/embed/v1/place?${params.toString()}`}
           style={{ visibility: isLoading ? 'hidden' : 'visible' }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="COSS KNP GROUP 위치"
+          title={text.iframeTitle}
           onLoad={handleLoad}
           onError={handleError}
         />
@@ -107,7 +108,7 @@ export function GoogleMap() {
       <div className="map">{renderMap()}</div>
       {showLargeMapLink && (
         <p className="map__link">
-          <TextLink href={googleMapsSearchUrl}>구글맵에서 크게 보기</TextLink>
+          <TextLink href={googleMapsSearchUrl}>{text.openLarge}</TextLink>
         </p>
       )}
     </div>

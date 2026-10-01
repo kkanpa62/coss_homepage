@@ -4,10 +4,12 @@
  */
 
 import { useTheme } from '../../hooks/useTheme';
+import { useI18n } from '../../i18n/I18nProvider';
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
-  const label = theme === 'dark' ? '밝은 테마로 전환' : '어두운 테마로 전환';
+  const { labels } = useI18n().content;
+  const label = theme === 'dark' ? labels.themeToLight : labels.themeToDark;
 
   return (
     <button type="button" className="icon-button" onClick={toggleTheme} aria-label={label} title={label}>

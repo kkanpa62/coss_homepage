@@ -8,8 +8,8 @@
 
 import { Key, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { labels } from '../../constants/labels';
 import { usePointerDrag } from '../../hooks/usePointerDrag';
+import { useI18n } from '../../i18n/I18nProvider';
 import { prefersReducedMotion } from '../../utils/motion';
 
 /** 버튼 한 번에 이동하는 거리(보이는 폭 대비) */
@@ -42,6 +42,7 @@ interface RailState {
 const INITIAL_STATE: RailState = { canPrev: false, canNext: false, visible: 1, progress: 0 };
 
 export function ScrollRail<T>({ items, getKey, renderItem, label, className }: ScrollRailProps<T>) {
+  const { labels } = useI18n().content;
   const trackRef = useRef<HTMLUListElement>(null);
   const [state, setState] = useState<RailState>(INITIAL_STATE);
 

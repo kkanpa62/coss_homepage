@@ -54,6 +54,8 @@ export interface SectionIntro {
 export interface Member {
   id: number;
   name: string;
+  /** 이름 읽는 법(일본어 페이지에서 한자 이름 아래에 가타카나로 표시). 없으면 표시하지 않음 */
+  reading?: string;
   position: string;
   department: string;
   images: MemberImages;
@@ -79,12 +81,57 @@ export interface MemberImages {
 /**
  * @interface NavigationItem
  * @description 상단 네비게이션 메뉴의 각 항목을 정의하는 데이터 구조입니다.
- * @property {PageType} id - 메뉴 항목이 연결될 페이지의 식별자
- * @property {string} label - 메뉴에 표시될 텍스트
- * @property {string} path - React Router에서 사용할 실제 경로
+ * @property {PageType} id - 메뉴 항목이 연결될 페이지의 식별자(메뉴 이름은 언어별 content의 navigation)
+ * @property {string} path - 언어 공통 경로(실제 링크는 언어 접두어를 붙여 씀)
  */
 export interface NavigationItem {
   id: PageType;
-  label: string;
   path: string;
+}
+
+/**
+ * 아래 타입은 언어 공통 데이터(constants)와 언어별 문구(content)를 합친, 화면에서 쓰는 형태입니다.
+ */
+
+/** 업무분야 하이라이트 */
+export interface ServiceHighlight {
+  title: string;
+  description: string;
+}
+
+/** 업무분야 한 개 */
+export interface ServiceData {
+  id: number;
+  icon: import('lucide-react').LucideIcon;
+  title: string;
+  description: string;
+  highlights: ServiceHighlight[];
+  services: string[];
+}
+
+/** 뉴스 한 건 */
+export interface NewsItem {
+  id: number;
+  title: string;
+  date: string;
+  description: string;
+  source: string;
+  url: string;
+}
+
+/** 차별화된 강점 한 개 */
+export interface Strength {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+/** 회사소개 K·N·P 항목 한 개 */
+export interface KnpItem {
+  letter: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: import('lucide-react').LucideIcon;
 }

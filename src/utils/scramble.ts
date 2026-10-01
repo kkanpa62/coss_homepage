@@ -1,7 +1,8 @@
 /**
  * @file scramble.ts
  * @description 스크램블(글리치) 효과에서 한 글자를 비슷한 모양의 글자나 노이즈로 바꾸는 규칙입니다.
- *              라틴 글자는 닮은 기호로, 한글은 같은 초성·중성의 다른 음절이나 초성 자모로 흔듭니다.
+ *              라틴 글자는 닮은 기호로, 한글은 같은 초성·중성의 다른 음절이나 초성 자모로,
+ *              일본어 가나는 같은 가나 블록의 다른 글자로 흔듭니다.
  */
 
 /** 라틴 대문자별로 닮은 글자 */
@@ -58,12 +59,35 @@ function hangulLookalike(char: string): string {
   return pickFrom(WIDE_NOISE);
 }
 
+/** 일본어 가나 범위 — 같은 종류(히라가나/가타카나) 안에서 흔듭니다. */
+const KANA_RANGES: [number, number][] = [
+  [0x3041, 0x3093], // ぁ–ん
+  [0x30a1, 0x30f3], // ァ–ン
+];
+
+/**
+ * 가나는 같은 가나 블록의 다른 글자로 흔듭니다(가끔 노이즈).
+ * 한자는 무작위 한자를 쓰면 글꼴 조각을 추가로 내려받게 되므로 노이즈로만 흔듭니다.
+ */
+function kanaLookalike(char: string): string | null {
+  const code = char.charCodeAt(0);
+  const range = KANA_RANGES.find(([start, end]) => code >= start && code <= end);
+  if (!range) return null;
+  if (Math.random() < 0.2) return pickFrom(WIDE_NOISE);
+  const [start, end] = range;
+  return String.fromCharCode(start + Math.floor(Math.random() * (end - start + 1)));
+}
+
 /**
  * 원래 글자 하나에 대해 이번 프레임에 보여 줄 대체 글자를 돌려줍니다.
  */
 export function scrambleGlyph(char: string): string {
   if (isHangulSyllable(char)) {
     return hangulLookalike(char);
+  }
+  const kana = kanaLookalike(char);
+  if (kana) {
+    return kana;
   }
   if (isWideChar(char)) {
     return pickFrom(WIDE_NOISE);

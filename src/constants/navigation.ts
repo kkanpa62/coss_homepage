@@ -1,23 +1,16 @@
 /**
  * @file navigation.ts
- * @description 웹사이트의 상단 네비게이션 메뉴 항목을 정의합니다.
- *              메뉴의 순서나 이름을 변경할 때 이 파일을 수정합니다.
- * @exports navigationItems - NavigationItem 타입의 배열로 구성된 메뉴 데이터
+ * @description 상단 메뉴의 순서와 경로(언어 공통). 메뉴 이름은 content/{ko,ja}.ts의 navigation에 있습니다.
  */
 
 import { NavigationItem } from '../types';
 
-/**
- * @constant navigationItems
- * @type {NavigationItem[]}
- * @description 상단 네비게이션 바에 표시될 메뉴 항목의 배열입니다.
- *              배열의 순서가 실제 메뉴의 순서를 결정합니다.
- */
+/** 배열 순서가 실제 메뉴 순서입니다. */
 export const navigationItems: NavigationItem[] = [
-  { id: 'home', label: '홈', path: '/' },
-  { id: 'about', label: '회사소개', path: '/about' },
-  { id: 'services', label: '업무분야', path: '/services' },
-  { id: 'members', label: '구성원', path: '/members' },
-  { id: 'news', label: '뉴스/소식', path: '/news' },
-  { id: 'location', label: '오시는길', path: '/location' },
+  { id: 'home', path: '/' },
+  { id: 'about', path: '/about' },
+  { id: 'services', path: '/services' },
+  { id: 'members', path: '/members' },
+  { id: 'news', path: '/news' },
+  { id: 'location', path: '/location' },
 ];

@@ -4,30 +4,33 @@
  */
 
 import { Mail, MapPin, Phone } from 'lucide-react';
-import { contactLabels, locationInfo, locationIntro } from '../../constants/location';
+import { locationInfo } from '../../constants/location';
+import { useI18n } from '../../i18n/I18nProvider';
 import { PageHeader } from '../common/PageHeader';
 import { Reveal } from '../common/Reveal';
 import { ContactBlock } from '../location/ContactBlock';
 import { GoogleMap } from '../location/GoogleMap';
 
 export function LocationPage() {
-  const { address, contact, businessHours, emailInfo } = locationInfo;
+  const { content } = useI18n();
+  const { intro, contactLabels, address, phoneDisplay, businessHours, emailInfo } = content.location;
+  const { contact } = locationInfo;
 
   return (
     <>
-      <PageHeader {...locationIntro} />
+      <PageHeader {...intro} />
 
       <Reveal className="contact-grid">
         <ContactBlock
           icon={<MapPin aria-hidden="true" />}
           title={contactLabels.address}
           primary={[address.street, address.building]}
-          secondary={[`${contactLabels.postalCode}: ${address.postalCode}`]}
+          secondary={[`${contactLabels.postalCode}: ${locationInfo.address.postalCode}`]}
         />
         <ContactBlock
           icon={<Phone aria-hidden="true" />}
           title={contactLabels.phone}
-          primary={[<a href={`tel:${contact.phone}`}>{contact.phone}</a>]}
+          primary={[<a href={`tel:${contact.phoneIntl}`}>{phoneDisplay}</a>]}
           secondary={[businessHours.weekday, businessHours.lunch]}
         />
         <ContactBlock

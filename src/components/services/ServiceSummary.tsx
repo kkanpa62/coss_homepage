@@ -4,23 +4,25 @@
  */
 
 import { Link } from 'react-router-dom';
-import { labels } from '../../constants/labels';
-import { ServiceData, servicePath } from '../../constants/services';
+import { servicePath } from '../../constants/services';
+import { useI18n } from '../../i18n/I18nProvider';
+import { ServiceData } from '../../types';
 import { formatIndex } from '../../utils/format';
 import { TextLink } from '../common/TextLink';
 
 export function ServiceSummary({ service }: { service: ServiceData }) {
+  const { content, path } = useI18n();
   const Icon = service.icon;
 
   return (
-    <Link to={servicePath(service.id)} className="service-summary">
+    <Link to={path(servicePath(service.id))} className="service-summary">
       <span className="index-number">{formatIndex(service.id)}</span>
       <div className="service-summary__head">
         <Icon className="service-summary__icon" aria-hidden="true" />
         <h3 className="service-summary__title">{service.title}</h3>
       </div>
       <p className="service-summary__description">{service.description}</p>
-      <TextLink>{labels.more}</TextLink>
+      <TextLink>{content.labels.more}</TextLink>
     </Link>
   );
 }

@@ -3,10 +3,13 @@
  * @description 업무분야 상세 — 번호·아이콘·제목 / 설명·하이라이트·서비스 범위.
  */
 
-import { SERVICE_SCOPE_LABEL, ServiceData, serviceAnchorId } from '../../constants/services';
+import { serviceAnchorId } from '../../constants/services';
+import { useI18n } from '../../i18n/I18nProvider';
+import { ServiceData } from '../../types';
 import { formatIndex } from '../../utils/format';
 
 export function ServiceDetail({ service }: { service: ServiceData }) {
+  const { content } = useI18n();
   const Icon = service.icon;
 
   return (
@@ -30,7 +33,7 @@ export function ServiceDetail({ service }: { service: ServiceData }) {
         </dl>
 
         <div className="service-detail__scope">
-          <h3 className="eyebrow">{SERVICE_SCOPE_LABEL}</h3>
+          <h3 className="eyebrow">{content.services.scopeLabel}</h3>
           <ol className="scope-list">
             {service.services.map((item) => (
               <li key={item}>{item}</li>

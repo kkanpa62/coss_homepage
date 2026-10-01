@@ -5,7 +5,7 @@
  */
 
 import { Award, Briefcase, GraduationCap, UserRound } from 'lucide-react';
-import { memberDetailLabels } from '../../constants/members';
+import { useI18n } from '../../i18n/I18nProvider';
 import { Member } from '../../types';
 import { DetailRow, PlainList } from '../common/DetailRow';
 import { ImageWithFallback } from '../common/ImageWithFallback';
@@ -14,10 +14,13 @@ import { TagList } from '../common/Tag';
 import { TextLink } from '../common/TextLink';
 
 export function MemberDetailPage({ member }: { member: Member }) {
+  const { content, path } = useI18n();
+  const memberDetailLabels = content.members.detailLabels;
+
   return (
     <>
       <p className="member-detail__back">
-        <TextLink to="/members" arrow="←">
+        <TextLink to={path('/members')} arrow="←">
           {memberDetailLabels.back}
         </TextLink>
       </p>
@@ -30,6 +33,7 @@ export function MemberDetailPage({ member }: { member: Member }) {
           </figure>
           <div>
             <ScrambleText as="h1" lines={[member.name]} className="member-detail__name" duration={1000} />
+            {member.reading && <p className="member-detail__reading">{member.reading}</p>}
             <p className="member-detail__position">{member.position}</p>
             <p className="member-detail__department">{member.department}</p>
           </div>

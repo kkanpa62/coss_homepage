@@ -6,9 +6,9 @@
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import { labels } from '../../constants/labels';
 import { locationInfo } from '../../constants/location';
 import { navigationItems } from '../../constants/navigation';
+import { useI18n } from '../../i18n/I18nProvider';
 import { formatIndex } from '../../utils/format';
 
 interface MobileMenuProps {
@@ -17,6 +17,8 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
+  const { content, path } = useI18n();
+
   useEffect(() => {
     if (!open) return undefined;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -33,20 +35,20 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
   return (
     <div id="mobile-menu" className={clsx('mobile-menu', open && 'is-open')} aria-hidden={!open}>
-      <nav aria-label={labels.mainMenu}>
+      <nav aria-label={content.labels.mainMenu}>
         <ul className="mobile-menu__list">
           {navigationItems.map((item, index) => (
             <li key={item.id}>
-              <NavLink to={item.path} end={item.path === '/'} className="mobile-menu__link" onClick={onClose}>
+              <NavLink to={path(item.path)} end={item.path === '/'} className="mobile-menu__link" onClick={onClose}>
                 <span className="index-number">{formatIndex(index + 1)}</span>
-                {item.label}
+                {content.navigation[item.id]}
               </NavLink>
             </li>
           ))}
         </ul>
       </nav>
       <p className="mobile-menu__foot">
-        {locationInfo.contact.phone}
+        {content.location.phoneDisplay}
         <br />
         {locationInfo.contact.email}
       </p>

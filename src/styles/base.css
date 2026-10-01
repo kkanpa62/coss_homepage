@@ -32,6 +32,13 @@ body {
   min-height: 100vh;
 }
 
+/* 일본어는 띄어쓰기가 없으므로 글자 단위로 줄바꿈하고, 문장 부호·작은 가나가 줄 앞에 오지 않게 합니다(금칙 처리). */
+:root[lang="ja"] body {
+  word-break: normal;
+  line-break: strict;
+  letter-spacing: 0;
+}
+
 h1,
 h2,
 h3,

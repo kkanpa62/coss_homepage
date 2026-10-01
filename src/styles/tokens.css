@@ -30,6 +30,12 @@
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
+/* 일본어 페이지: 가나·한자를 일본어 글꼴로 그립니다(한자는 일본식 자형). */
+:root[lang="ja"] {
+  --font-body: "Pretendard JP Variable", "Pretendard JP", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  --font-mono: "JetBrains Mono", "M PLUS 1 Code", ui-monospace, monospace;
+}
+
 :root[data-theme="dark"] {
   color-scheme: dark;
   --bg: #0b0a0a;

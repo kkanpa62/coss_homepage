@@ -5,6 +5,7 @@
  */
 
 import { Link } from 'react-router-dom';
+import { useI18n } from '../../i18n/I18nProvider';
 import { Member, MemberImages } from '../../types';
 import { ImageWithFallback } from '../common/ImageWithFallback';
 
@@ -17,8 +18,10 @@ interface MemberCardProps {
 }
 
 export function MemberCard({ member, image, showDepartment = false }: MemberCardProps) {
+  const { path } = useI18n();
+
   return (
-    <Link to={`/members/${member.id}`} className="member-card">
+    <Link to={path(`/members/${member.id}`)} className="member-card">
       <figure className="member-card__figure">
         <ImageWithFallback src={member.images[image]} alt={member.name} className="member-card__image" />
       </figure>
@@ -26,6 +29,7 @@ export function MemberCard({ member, image, showDepartment = false }: MemberCard
         {member.name}
         <span className="member-card__arrow" aria-hidden="true">→</span>
       </h3>
+      {member.reading && <p className="member-card__reading">{member.reading}</p>}
       <p className="member-card__position">{member.position}</p>
       {showDepartment && <p className="member-card__department">{member.department}</p>}
     </Link>

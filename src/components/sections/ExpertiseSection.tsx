@@ -5,17 +5,18 @@
  * 각 항목을 누르면 업무분야 페이지의 해당 위치로 이동합니다.
  */
 
-import { homeSections } from '../../constants/home';
-import { featuredServices } from '../../constants/services';
+import { useI18n } from '../../i18n/I18nProvider';
 import { Reveal } from '../common/Reveal';
 import { SectionHeader } from '../common/SectionHeader';
 import { ServiceSummary } from '../services/ServiceSummary';
 
 export function ExpertiseSection() {
+  const { content, featuredServices } = useI18n();
+
   return (
     <section className="section">
       <div className="container">
-        <SectionHeader {...homeSections.expertise} />
+        <SectionHeader {...content.home.sections.expertise} />
         <Reveal className="service-summary-grid">
           {featuredServices.map((service) => (
             <ServiceSummary key={service.id} service={service} />

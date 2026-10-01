@@ -7,7 +7,8 @@
  */
 
 import { Fragment } from 'react';
-import { aboutIntro, aboutParagraphs, cossLines, cossStatement, knpIntro, knpItems } from '../../constants/about';
+import { cossLines } from '../../constants/about';
+import { useI18n } from '../../i18n/I18nProvider';
 import { PageHeader } from '../common/PageHeader';
 import { Reveal } from '../common/Reveal';
 
@@ -33,12 +34,15 @@ function CossWords({ words }: { words: (typeof cossLines)[number] }) {
 }
 
 export function AboutPage() {
+  const { content, knpItems } = useI18n();
+  const { intro, paragraphs, coss, knpIntro } = content.about;
+
   return (
     <>
       {/* 첫 번째 영역: 회사 소개 */}
-      <PageHeader {...aboutIntro} />
+      <PageHeader {...intro} />
       <div className="measure prose">
-        {aboutParagraphs.map((paragraph) => (
+        {paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
       </div>
@@ -58,15 +62,15 @@ export function AboutPage() {
           </span>
         </h2>
         <p className="about-coss__statement">
-          <strong>{cossStatement.lead}</strong>
-          {cossStatement.before}
+          <strong>{coss.lead}</strong>
+          {coss.before}
           {cossLines.map((words, index) => (
             <span key={index}>
               {index > 0 && ' '}
               <CossWords words={words} />
             </span>
           ))}
-          {cossStatement.after}
+          {coss.after}
         </p>
       </Reveal>
 
