@@ -357,6 +357,8 @@ export const ja: SiteContent = {
     articleCount: '記事 {count}件',
     sectionCount: '{count}件',
     open: 'レポートを見る',
+    readFull: '全文を読む',
+    collapse: '閉じる',
     back: 'ニュース一覧へ',
     sectionIndex: 'レポートの目次',
     newer: '翌月',

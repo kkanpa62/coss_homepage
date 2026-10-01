@@ -890,22 +890,46 @@
   margin-top: 1em;
 }
 
+/* 펼친 긴 버전(전문) — 글 폭을 좁혀 읽기 쉽게 */
+.report-article__text.is-expanded {
+  max-width: var(--measure);
+}
+
+.report-article__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 16px;
+}
+
+.report-article__toggle {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.report-article__toggle:hover,
+.report-article__toggle[aria-expanded="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .report-article__title {
   margin-bottom: 14px;
   font-size: 22px;
-}
-
-.report-article--featured {
-  padding: 48px 0;
-}
-
-.report-article--featured .report-article__body {
-  max-width: var(--measure);
-  font-size: 18px;
-}
-
-.report-article__link {
-  margin-top: 16px;
 }
 
 /* 다른 매체로 대신한 링크는 원문보다 한 단계 흐리게 */

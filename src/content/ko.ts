@@ -340,6 +340,8 @@ export const ko: SiteContent = {
     articleCount: '기사 {count}건',
     sectionCount: '{count}건',
     open: '리포트 보기',
+    readFull: '전문 보기',
+    collapse: '접기',
     back: '뉴스 목록으로',
     sectionIndex: '리포트 분류 바로가기',
     newer: '다음 달',

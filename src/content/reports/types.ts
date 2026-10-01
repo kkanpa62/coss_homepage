@@ -19,8 +19,8 @@ export type ReportSectionId = 'litigation' | 'administration' | 'other' | 'featu
 export const REPORT_SECTION_ORDER: ReportSectionId[] = ['litigation', 'administration', 'other', 'features'];
 
 /**
- * 리포트 상세 페이지에 보이는 분류와 순서. 주요 기사(features)는 상세에 싣지 않고
- * 뉴스/소식 페이지의 「소식」 목록에 일반 뉴스와 같은 모양으로 싣습니다.
+ * 리포트 상세 페이지에 보이는 분류와 순서. 주요 기사(features, 긴 버전)는 따로 분류를 두지 않고,
+ * 분류 안에 실린 짧은 버전의 「전문 보기」로 펼쳐 보입니다. 짧은 버전이 없는 주요 기사는 기술·산업에 실립니다.
  */
 export const REPORT_DETAIL_SECTIONS: ReportSectionId[] = ['litigation', 'administration', 'other'];
 
@@ -59,6 +59,8 @@ export interface ReportArticle {
   date: string;
   /** 리포트에 적힌 출처 매체 */
   outlet: OutletId;
+  /** 주요 기사의 짧은 버전이면, 「전문 보기」로 펼칠 긴 버전(features)의 id */
+  full?: string;
   link?: ReportLink;
   /** ja: 워드 원문 그대로, ko: 번역 */
   text: Record<Locale, ReportArticleText>;
@@ -74,7 +76,5 @@ export interface MonthlyReport {
   text: Record<Locale, { title: string; lead: string }>;
   /** 워드에 없지만 승인을 받아 넣은 일본어 문구(예: 주요 기사 제목) */
   additions: string[];
-  /** 주요 기사를 다시 실어 한 번만 게재한 기사 기록 */
-  duplicates: { section: ReportSectionId; of: string }[];
   sections: Record<ReportSectionId, ReportArticle[]>;
 }

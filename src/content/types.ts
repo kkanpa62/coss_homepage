@@ -118,6 +118,9 @@ export interface SiteContent {
     /** 분류 머리의 "{count}건" */
     sectionCount: string;
     open: string;
+    /** 짧은 버전 아래 긴 버전 펼치기 / 접기 */
+    readFull: string;
+    collapse: string;
     back: string;
     sectionIndex: string;
     newer: string;

@@ -32,13 +32,24 @@ export const sortArticles = (articles: ReportArticle[]) => [...articles].sort((a
 
 /** 상세 페이지에 보이는 분류(순서대로, 기사가 있는 것만) */
 export const visibleSections = (report: MonthlyReport): ReportSectionId[] =>
-  REPORT_DETAIL_SECTIONS.filter((id) => report.sections[id].length > 0);
+  REPORT_DETAIL_SECTIONS.filter((id) => sectionArticles(report, id).length > 0);
+
+/** 짧은 버전이 없어 따로 실어야 하는 주요 기사 */
+const standaloneFeatures = (report: MonthlyReport) => {
+  const linked = new Set(REPORT_DETAIL_SECTIONS.flatMap((id) => report.sections[id].map((a) => a.full)));
+  return report.sections.features.filter((feature) => !linked.has(feature.id));
+};
+
+/** 분류 하나에 실리는 기사(최신순). 기술·산업에는 짧은 버전이 없는 주요 기사도 함께 실립니다. */
+export const sectionArticles = (report: MonthlyReport, id: ReportSectionId): ReportArticle[] =>
+  sortArticles(id === 'other' ? [...report.sections.other, ...standaloneFeatures(report)] : report.sections[id]);
+
+/** 짧은 버전이 펼칠 긴 버전(주요 기사) */
+export const fullArticleOf = (report: MonthlyReport, article: ReportArticle) =>
+  article.full ? report.sections.features.find((feature) => feature.id === article.full) : undefined;
 
 /** 상세 페이지에 실리는 기사 수 */
 export const countArticles = (report: MonthlyReport) =>
-  REPORT_DETAIL_SECTIONS.reduce((sum, id) => sum + report.sections[id].length, 0);
-
-/** 모든 리포트의 주요 기사(최신순) — 뉴스/소식 페이지의 「소식」 목록에 싣습니다. */
-export const featureArticles = (): ReportArticle[] => sortArticles(reports.flatMap((report) => report.sections.features));
+  REPORT_DETAIL_SECTIONS.reduce((sum, id) => sum + sectionArticles(report, id).length, 0);
 
 export * from './types';
