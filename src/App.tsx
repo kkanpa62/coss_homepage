@@ -15,7 +15,9 @@ import { LocationPage } from './components/pages/LocationPage';
 import { MemberDetailPage } from './components/pages/MemberDetailPage';
 import { MembersPage } from './components/pages/MembersPage';
 import { NewsPage } from './components/pages/NewsPage';
+import { ReportPage } from './components/pages/ReportPage';
 import { ServicesPage } from './components/pages/ServicesPage';
+import { findReport } from './content/reports';
 import { DocumentMeta } from './i18n/DocumentMeta';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
 import { DEFAULT_LOCALE, Locale, LOCALES, localePrefix } from './i18n/locales';
@@ -60,6 +62,25 @@ function MemberDetailRoute() {
   );
 }
 
+/**
+ * 월간 리포트 상세 라우트. 없는 월이면 뉴스 목록으로 보냅니다.
+ */
+function ReportRoute() {
+  const { month } = useParams<{ month: string }>();
+  const { path } = useI18n();
+  const report = findReport(month);
+
+  if (!report) {
+    return <Navigate to={path('/news')} replace />;
+  }
+
+  return (
+    <PageLayout>
+      <ReportPage report={report} />
+    </PageLayout>
+  );
+}
+
 /** 없는 주소는 현재 언어의 홈으로 보냅니다. */
 function NotFoundRoute() {
   const { path } = useI18n();
@@ -83,6 +104,7 @@ function LocaleSite({ locale }: { locale: Locale }) {
           <Route path="members" element={<PageLayout><MembersPage /></PageLayout>} />
           <Route path="members/:memberId" element={<MemberDetailRoute />} />
           <Route path="news" element={<PageLayout><NewsPage /></PageLayout>} />
+          <Route path="news/reports/:month" element={<ReportRoute />} />
           <Route path="location" element={<PageLayout><LocationPage /></PageLayout>} />
           <Route path="*" element={<NotFoundRoute />} />
         </Routes>

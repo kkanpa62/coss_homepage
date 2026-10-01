@@ -344,6 +344,27 @@ export const ja: SiteContent = {
     },
   },
 
+  reports: {
+    listIntro: { title: '月刊 知的財産ニュース', description: '韓国の知的財産に関する主な報道を毎月まとめてご紹介します' },
+    newsListIntro: { title: 'お知らせ' },
+    eyebrow: 'Monthly IP News',
+    sections: {
+      litigation: '紛争',
+      administration: '政策・行政',
+      other: '技術・産業',
+      features: '注目記事',
+    },
+    articleCount: '記事 {count}件',
+    sectionCount: '{count}件',
+    open: 'レポートを見る',
+    back: 'ニュース一覧へ',
+    sectionIndex: 'レポートの目次',
+    newer: '翌月',
+    older: '前月',
+    link: { original: '元記事', related: '関連記事' },
+    sourceLanguageNote: '（韓国語）',
+  },
+
   location: {
     intro: {
       eyebrow: 'Location',

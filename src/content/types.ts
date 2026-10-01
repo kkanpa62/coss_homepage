@@ -9,6 +9,7 @@ import { StrengthId } from '../constants/home';
 import { MemberId } from '../constants/members';
 import { NewsId } from '../constants/news';
 import { ServiceId } from '../constants/services';
+import { ReportSectionId } from './reports/types';
 import { PageIntro, PageType, SectionIntro, ServiceHighlight } from '../types';
 
 export interface MemberText {
@@ -101,6 +102,30 @@ export interface SiteContent {
     /** 원문 기사 링크 이름(일본어는 원문이 한국어라는 안내 포함) */
     linkLabel: string;
     items: Record<NewsId, NewsText>;
+  };
+
+  /** 월간 지식재산 뉴스 리포트(목록·상세) 화면 문구 — 리포트 내용은 content/reports/YYYY-MM.ts */
+  reports: {
+    /** 뉴스 페이지의 리포트 목록 머리 */
+    listIntro: SectionIntro;
+    /** 뉴스 페이지의 기존 소식 목록 머리 */
+    newsListIntro: SectionIntro;
+    /** 리포트 상세 페이지 머리 위 라벨 */
+    eyebrow: string;
+    sections: Record<ReportSectionId, string>;
+    /** 목록 카드의 "기사 {count}건" — {count} 자리에 숫자 */
+    articleCount: string;
+    /** 분류 머리의 "{count}건" */
+    sectionCount: string;
+    open: string;
+    back: string;
+    sectionIndex: string;
+    newer: string;
+    older: string;
+    /** 원문 링크 이름 */
+    link: { original: string; related: string };
+    /** 링크 대상이 한국어 기사라는 안내(한국어 페이지는 빈 문자열) */
+    sourceLanguageNote: string;
   };
 
   location: {

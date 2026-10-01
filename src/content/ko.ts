@@ -327,6 +327,27 @@ export const ko: SiteContent = {
     },
   },
 
+  reports: {
+    listIntro: { title: '월간 지식재산 뉴스', description: '한국의 지식재산 관련 주요 기사를 매달 정리해 소개합니다' },
+    newsListIntro: { title: '소식' },
+    eyebrow: 'Monthly IP News',
+    sections: {
+      litigation: '분쟁',
+      administration: '정책·행정',
+      other: '기술·산업',
+      features: '주요 기사',
+    },
+    articleCount: '기사 {count}건',
+    sectionCount: '{count}건',
+    open: '리포트 보기',
+    back: '뉴스 목록으로',
+    sectionIndex: '리포트 분류 바로가기',
+    newer: '다음 달',
+    older: '이전 달',
+    link: { original: '원문 기사', related: '관련 기사' },
+    sourceLanguageNote: '',
+  },
+
   location: {
     intro: {
       eyebrow: 'Location',

@@ -19,7 +19,7 @@ export function MemberDetailPage({ member }: { member: Member }) {
 
   return (
     <>
-      <p className="member-detail__back">
+      <p className="page-back">
         <TextLink to={path('/members')} arrow="←">
           {memberDetailLabels.back}
         </TextLink>

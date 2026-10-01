@@ -153,7 +153,7 @@
 }
 
 /* ---------- 구성원 상세 ---------- */
-.member-detail__back {
+.page-back {
   margin-bottom: 48px;
 }
 
@@ -788,5 +788,150 @@
 @media (max-width: 560px) {
   .map {
     aspect-ratio: 4 / 5;
+  }
+}
+
+/* ---------- 월간 리포트: 뉴스 페이지 묶음 ---------- */
+.news-group + .news-group {
+  margin-top: 96px;
+}
+
+/* 목록 카드 */
+.report-card {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.report-card__month {
+  font-family: var(--font-mono);
+  font-size: clamp(22px, 3vw, 28px);
+  line-height: 1.3;
+  color: var(--accent);
+}
+
+.report-card__title {
+  margin-bottom: 10px;
+  font-size: 23px;
+  transition: color 0.2s;
+}
+
+.report-card:hover .report-card__title {
+  color: var(--accent);
+}
+
+.report-card__lead {
+  color: var(--muted);
+}
+
+
+.report-card__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* 상세: 분류 */
+.report-section {
+  padding-top: 56px;
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.report-section__head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.report-section__title {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.report-section__count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* 상세: 기사 */
+.report-article {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.report-article__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.report-article__date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.report-article__body p + p {
+  margin-top: 1em;
+}
+
+.report-article__title {
+  margin-bottom: 14px;
+  font-size: 22px;
+}
+
+.report-article--featured {
+  padding: 48px 0;
+}
+
+.report-article--featured .report-article__body {
+  max-width: var(--measure);
+  font-size: 18px;
+}
+
+.report-article__link {
+  margin-top: 16px;
+}
+
+/* 다른 매체로 대신한 링크는 원문보다 한 단계 흐리게 */
+.source-link--related {
+  color: var(--muted);
+}
+
+.report-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 72px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 720px) {
+  .report-card,
+  .report-article {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .report-article__meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
   }
 }
