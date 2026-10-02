@@ -32,11 +32,13 @@ export const outlets = {
   mk: { ko: '매일경제', ja: '毎日経済新聞' },
   newscj: { ko: '천지일보', ja: '天地日報' },
   edaily: { ko: '이데일리', ja: 'イーデイリー' },
+  asiae: { ko: '아시아경제', ja: 'アジア経済新聞' },
+  fnnews: { ko: '파이낸셜뉴스', ja: 'ファイナンシャルニュース' },
+  naeil: { ko: '내일신문', ja: '明日新聞' },
+  idomin: { ko: '경남도민일보', ja: '慶南道民日報' },
 
   // 원문 대신 연결하는 관련 기사 매체
   etoday: { ko: '이투데이', ja: 'イートゥデイ' },
-  fnnews: { ko: '파이낸셜뉴스', ja: 'ファイナンシャルニュース' },
-  asiae: { ko: '아시아경제', ja: 'アジア経済' },
   heraldcorp: { ko: '헤럴드경제', ja: 'ヘラルド経済' },
   seoul: { ko: '서울신문', ja: 'ソウル新聞' },
   khan: { ko: '경향신문', ja: '京郷新聞' },
