@@ -308,7 +308,7 @@ export const ko: SiteContent = {
     intro: {
       eyebrow: 'News',
       title: ['뉴스 / 소식'],
-      description: 'COSS KNP GROUP의 최신 소식과 지식재산권 업계 동향을 확인하세요',
+      description: '최신 소식과 지식재산권 업계 동향을 확인하세요',
     },
     linkLabel: '자세히 보기',
     items: {
