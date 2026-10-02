@@ -36,6 +36,12 @@ export const outlets = {
   fnnews: { ko: '파이낸셜뉴스', ja: 'ファイナンシャルニュース' },
   naeil: { ko: '내일신문', ja: '明日新聞' },
   idomin: { ko: '경남도민일보', ja: '慶南道民日報' },
+  donga: { ko: '동아일보', ja: '東亜日報' },
+  pharmnews: { ko: '팜뉴스', ja: 'ファームニュース' },
+  gamemeca: { ko: '게임메카', ja: 'ゲームメカ' },
+  thebiz: { ko: '더비즈', ja: 'ザ・ビズ' },
+  kmnews: { ko: '기계신문', ja: '機械新聞' },
+  daily365: { ko: '데일리365', ja: 'デイリー365' },
 
   // 원문 대신 연결하는 관련 기사 매체
   etoday: { ko: '이투데이', ja: 'イートゥデイ' },
@@ -43,6 +49,7 @@ export const outlets = {
   seoul: { ko: '서울신문', ja: 'ソウル新聞' },
   khan: { ko: '경향신문', ja: '京郷新聞' },
   newswire: { ko: '뉴스와이어', ja: 'ニュースワイヤー' },
+  patentnews: { ko: '특허뉴스', ja: '特許ニュース' },
 } as const satisfies Record<string, Record<Locale, string>>;
 
 export type OutletId = keyof typeof outlets;
