@@ -73,10 +73,12 @@ export interface MemberImages {
  * @description 상단 네비게이션 메뉴의 각 항목을 정의하는 데이터 구조입니다.
  * @property {PageType} id - 메뉴 항목이 연결될 페이지의 식별자(메뉴 이름은 언어별 content의 navigation)
  * @property {string} path - 언어 공통 경로(실제 링크는 언어 접두어를 붙여 씀)
+ * @property {boolean} [highlight] - 메뉴에서 강조색 글자로 살짝 강조(헤더·모바일 메뉴 공통)
  */
 export interface NavigationItem {
   id: PageType;
   path: string;
+  highlight?: boolean;
 }
 
 /**

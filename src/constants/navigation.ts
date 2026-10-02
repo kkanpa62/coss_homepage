@@ -11,6 +11,6 @@ export const navigationItems: NavigationItem[] = [
   { id: 'about', path: '/about' },
   { id: 'services', path: '/services' },
   { id: 'members', path: '/members' },
-  { id: 'news', path: '/news' },
+  { id: 'news', path: '/news', highlight: true }, // 매달 리포트가 올라오는 메뉴라 강조
   { id: 'location', path: '/location' },
 ];

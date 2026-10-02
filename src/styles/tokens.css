@@ -13,6 +13,8 @@
   --kbd-bg: #d3d0cb;
   --kbd-fg: #2e2b28;
   --accent: #b8621c;
+  /* 작은 글자에 쓰는 강조색 — 배경과 명도 대비 4.5:1 이상(밝은 테마는 --accent보다 한 단계 진하게) */
+  --accent-text: #9d5418;
   --line: color-mix(in srgb, var(--fg) 12%, transparent);
   --line-strong: color-mix(in srgb, var(--fg) 24%, transparent);
   --surface: color-mix(in srgb, var(--fg) 4%, transparent);
@@ -44,4 +46,5 @@
   --kbd-bg: #2a2826;
   --kbd-fg: #cfcac3;
   --accent: #f0a860;
+  --accent-text: var(--accent);
 }

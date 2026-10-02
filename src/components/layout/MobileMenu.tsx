@@ -39,7 +39,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         <ul className="mobile-menu__list">
           {navigationItems.map((item, index) => (
             <li key={item.id}>
-              <NavLink to={path(item.path)} end={item.path === '/'} className="mobile-menu__link" onClick={onClose}>
+              <NavLink to={path(item.path)} end={item.path === '/'} className={clsx('mobile-menu__link', item.highlight && 'is-highlight')} onClick={onClose}>
                 <span className="index-number">{formatIndex(index + 1)}</span>
                 {content.navigation[item.id]}
               </NavLink>

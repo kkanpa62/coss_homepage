@@ -73,6 +73,11 @@
   color: var(--fg);
 }
 
+/* 강조 메뉴(뉴스/소식): 항상 강조색 글자. 현재 페이지 표시(아래 점)는 그대로 */
+.site-nav__link.is-highlight {
+  color: var(--accent-text);
+}
+
 .site-nav__link.active::after {
   content: "";
   position: absolute;
@@ -225,6 +230,10 @@
 .mobile-menu__link.active,
 .mobile-menu__link:hover {
   color: var(--fg);
+}
+
+.mobile-menu__link.is-highlight {
+  color: var(--accent-text);
 }
 
 .mobile-menu__foot {

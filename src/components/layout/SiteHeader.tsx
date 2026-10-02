@@ -46,7 +46,7 @@ export function SiteHeader() {
           <div className="site-header__actions">
             <nav className="site-nav" aria-label={content.labels.mainMenu}>
               {navigationItems.map((item) => (
-                <NavLink key={item.id} to={path(item.path)} end={item.path === '/'} className="site-nav__link">
+                <NavLink key={item.id} to={path(item.path)} end={item.path === '/'} className={clsx('site-nav__link', item.highlight && 'is-highlight')}>
                   {content.navigation[item.id]}
                 </NavLink>
               ))}
