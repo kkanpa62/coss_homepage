@@ -26,11 +26,16 @@ export const outlets = {
   genews: { ko: '글로벌이코노믹', ja: 'グローバルエコノミック' },
   pnp: { ko: 'P&P뉴스', ja: 'P&Pニュース' },
   energydaily: { ko: '에너지데일리', ja: 'エネルギーデイリー' },
+  chosun: { ko: '조선일보', ja: '朝鮮日報' },
+  lawtimes: { ko: '법률신문', ja: '法律新聞' },
+  hankyung: { ko: '한국경제', ja: '韓国経済新聞' },
+  mk: { ko: '매일경제', ja: '毎日経済新聞' },
+  newscj: { ko: '천지일보', ja: '天地日報' },
+  edaily: { ko: '이데일리', ja: 'イーデイリー' },
 
   // 원문 대신 연결하는 관련 기사 매체
   etoday: { ko: '이투데이', ja: 'イートゥデイ' },
   fnnews: { ko: '파이낸셜뉴스', ja: 'ファイナンシャルニュース' },
-  edaily: { ko: '이데일리', ja: 'イーデイリー' },
   asiae: { ko: '아시아경제', ja: 'アジア経済' },
   heraldcorp: { ko: '헤럴드경제', ja: 'ヘラルド経済' },
   seoul: { ko: '서울신문', ja: 'ソウル新聞' },

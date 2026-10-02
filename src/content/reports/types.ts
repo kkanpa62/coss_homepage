@@ -70,6 +70,8 @@ export interface MonthlyReport {
   source: string;
   /** 원문 구조의 지문(SHA-256) — 원본이 없는 곳에서도 일본어가 바뀌지 않았는지 확인 */
   sourceDigest: string;
+  /** 워드의 월 표기가 틀렸을 때만: 워드에 적힌 월(YYYY-MM). month는 기사 게재일로 확인한 실제 월 */
+  docMonth?: string;
   text: Record<Locale, { title: string; lead: string }>;
   /** 워드에 없지만 승인을 받아 넣은 일본어 문구(예: 주요 기사 제목) */
   additions: string[];
