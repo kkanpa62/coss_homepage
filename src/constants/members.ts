@@ -1,7 +1,7 @@
 /**
  * @file members.ts
  * @description 구성원의 언어와 무관한 데이터(ID·사진 경로). 이름·직함·약력 등 문구는 content/{ko,ja}.ts에 있습니다.
- *              구성원을 추가하면 두 언어 파일에도 같은 ID로 문구를 넣어야 빌드가 통과합니다.
+ *              구성원을 추가하면 두 언어 파일에도 같은 ID로 문구를 넣어야 타입 검사(npm run build)가 통과합니다.
  */
 
 import { MemberImages } from '../types';

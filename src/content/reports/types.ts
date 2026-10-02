@@ -41,7 +41,7 @@ export type ReportLink =
   | { kind: 'original'; url: string; verified: LinkVerification }
   | { kind: 'related'; url: string; outlet: OutletId; verified: LinkVerification };
 
-/** 한 언어의 기사 문구 — 요약 기사는 문단 하나, 주요 기사는 여러 문단(제목은 선택) */
+/** 한 언어의 기사 문구 — 분류 기사·짧은 버전은 문단 하나, 주요 기사(긴 버전)는 여러 문단. 제목은 import 직후에만 비어 있음 */
 export interface ReportArticleText {
   title?: string;
   body: string[];

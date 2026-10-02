@@ -26,7 +26,7 @@ body {
   letter-spacing: -0.01em;
   word-break: keep-all;
   overflow-wrap: break-word;
-  /* 한글 글꼴에는 이탤릭이 없으므로 가짜 기울임을 막고 라틴 글자만 기울어지게 합니다 */
+  /* 글꼴에 없는 굵기·기울임을 브라우저가 흉내 내지 않게 합니다(한글 가짜 기울임 방지) */
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;

@@ -1,49 +1,31 @@
+# COSS KNP GROUP 홈페이지
 
-# AI Expert Portfolio Layout
+회사소개 사이트 [coss-knp.com](https://coss-knp.com)의 소스입니다. 한국어(`/`)와 일본어(`/ja`) 페이지가 있습니다.
+React 18 + React Router + Vite이며, 스타일은 일반 CSS(`src/styles/`)로 작성했습니다.
 
-This is a code bundle for AI Expert Portfolio Layout. The original project is available at https://www.figma.com/design/AYdCQ3Pgxgcwck43EIVVZl/AI-Expert-Portfolio-Layout.
-
-## Setup
-
-### 1. Install dependencies
-
-```bash
-npm i
-```
-
-### 2. Configure Environment Variables
-
-Create a `.env` file in the root directory:
+## 실행
+요구 사항: Node 20
 
 ```bash
-cp .env.example .env
+npm ci
+cp .env.example .env    # VITE_GOOGLE_MAPS_API_KEY 입력(오시는길 지도)
+npm run dev             # http://localhost:3000
+npm run build           # 타입 검사 후 build/에 결과물
 ```
 
-Then edit `.env` and add your Google Maps API key:
+## 배포
+- `main`에 push하면 GitHub Actions(`.github/workflows/deploy.yml`)가 빌드해 GitHub Pages로 배포합니다.
+- 지도 키는 저장소 Secret `VITE_GOOGLE_MAPS_API_KEY`에 넣습니다. 키는 페이지 주소에 드러나므로,
+  Google Cloud에서 **Maps Embed API**만 허용하고 HTTP 리퍼러를 `coss-knp.com`으로 제한합니다.
 
-```
-VITE_GOOGLE_MAPS_API_KEY=your_actual_api_key_here
-```
+## 폴더
+| 위치 | 내용 |
+|---|---|
+| `src/content/{ko,ja}.ts` | 화면 문구(두 언어가 같은 타입을 따름) |
+| `src/constants/` | 언어 공통 데이터(ID·사진 경로·매체 목록 등) |
+| `src/content/reports/YYYY-MM.json` | 월간 지식재산 뉴스 리포트. 파일을 추가하면 자동 등록 |
+| `src/components/`, `src/styles/` | 화면 부품과 스타일 |
+| `src/public/` | 이미지·파비콘·`404.html`(SPA 주소 복원) |
+| `plugins/` | 빌드 플러그인(리포트 요약) |
 
-**Get your Google Maps API key:**
-1. Go to [Google Cloud Console](https://console.cloud.google.com/google/maps-apis)
-2. Create a new project or select an existing one
-3. Enable the Maps JavaScript API
-4. Create credentials (API Key)
-5. Copy the API key to your `.env` file
-
-**Important:** Never commit your `.env` file to version control. It's already listed in `.gitignore`.
-
-### 3. Run the development server
-
-```bash
-npm run dev
-```
-
-When the dev server is running, visit [http://localhost:3000](http://localhost:3000) to view the site (Vite opens this URL automatically by default).
-
-## Security Notes
-
-- API keys are stored in environment variables (`.env` file)
-- The `.env` file is excluded from git via `.gitignore`
-- Use `.env.example` as a template for required environment variables
+작업 지침, 리포트 도구, 원문은 이 저장소에 두지 않습니다.

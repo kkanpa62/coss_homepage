@@ -1,5 +1,5 @@
 {
-      "name": "AI Expert Portfolio Layout",
+      "name": "coss-homepage",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
@@ -60,6 +60,6 @@
       },
       "scripts": {
             "dev": "vite",
-            "build": "vite build"
+            "build": "tsc -p src --noEmit && vite build"
       }
 }

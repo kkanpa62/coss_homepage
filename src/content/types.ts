@@ -1,7 +1,7 @@
 /**
  * @file types.ts
  * @description 언어별 문구 파일(ko.ts, ja.ts)이 따라야 하는 구조입니다.
- *              구성원·업무분야·뉴스 등은 constants의 ID를 키로 쓰므로, 한 언어에 항목이 빠지면 타입 검사(빌드)가 실패합니다.
+ *              구성원·업무분야·뉴스 등은 constants의 ID를 키로 쓰므로, 한 언어에 항목이 빠지면 타입 검사(npm run build의 첫 단계)가 실패합니다.
  */
 
 import { KnpId } from '../constants/about';

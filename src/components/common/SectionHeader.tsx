@@ -1,6 +1,6 @@
 /**
  * @file SectionHeader.tsx
- * @description 홈 섹션 머리 — 제목(h2), 설명, 오른쪽 보조 링크(선택).
+ * @description 섹션 머리 — 제목(h2), 설명, 오른쪽 보조 링크(선택). 홈 섹션과 뉴스 페이지 묶음에서 씁니다.
  */
 
 import { ReactNode } from 'react';

@@ -1,7 +1,6 @@
 /**
  * @file index.ts
- * @description 애플리케이션 전역에서 사용되는 TypeScript 타입과 인터페이스를 정의합니다.
- *              데이터 구조의 일관성을 유지하고 타입 안정성을 보장하는 역할을 합니다.
+ * @description 화면에서 쓰는 공통 타입 — constants(언어 공통 데이터)와 content(언어별 문구)를 합친 형태입니다.
  */
 
 /**
@@ -31,7 +30,7 @@ export interface PageIntro {
 
 /**
  * @interface SectionIntro
- * @description 홈 섹션 머리(SectionHeader)에 표시되는 문구입니다.
+ * @description 섹션 머리(SectionHeader)에 표시되는 문구입니다.
  */
 export interface SectionIntro {
   title: string;
@@ -40,16 +39,7 @@ export interface SectionIntro {
 
 /**
  * @interface Member
- * @description 구성원 한 명의 상세 정보를 나타내는 데이터 구조입니다.
- * @property {number} id - 각 구성원을 식별하는 고유 ID
- * @property {string} name - 구성원의 이름
- * @property {string} position - 영문 이름 및 직책
- * @property {string} department - 소속 부서 또는 직급
- * @property {MemberImages} images - 프로필 이미지 경로 모음 (public 디렉토리 기준)
- * @property {string} [bio] - 구성원의 약력 또는 소개 (선택 사항)
- * @property {string[]} [education] - 학력 사항 목록 (선택 사항)
- * @property {string[]} [experience] - 경력 사항 목록 (선택 사항)
- * @property {string[]} [expertise] - 전문 분야 목록 (선택 사항)
+ * @description 구성원 한 명 — position: 영문 이름·직책, department: 직급, images: 사이트 루트 기준 경로(파일은 src/public/images).
  */
 export interface Member {
   id: number;

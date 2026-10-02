@@ -1,7 +1,7 @@
 /**
  * COSS KNP Group의 차별화된 강점 섹션
  *
- * 혁신적 기술 전문성, 전문 변리사팀, 글로벌 네트워크 — 이미지·번호·제목·설명.
+ * constants/home.ts의 강점 순서대로 — 이미지·번호·제목·설명.
  */
 
 import { useI18n } from '../../i18n/I18nProvider';
