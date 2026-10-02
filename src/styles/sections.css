@@ -937,6 +937,29 @@
   color: var(--muted);
 }
 
+/* 상세: 기사 본문을 받는 동안 — 빨리 받으면 안내가 보이지 않도록 잠시 뒤에 나타남 */
+.report-pending {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  min-height: 60vh;
+  align-content: flex-start;
+  padding-top: 56px;
+  color: var(--muted);
+}
+
+.report-pending__note {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  opacity: 0;
+  animation: report-pending-in 0.3s ease 0.6s forwards;
+}
+
+@keyframes report-pending-in {
+  to { opacity: 1; }
+}
+
 .report-pager {
   display: flex;
   justify-content: space-between;

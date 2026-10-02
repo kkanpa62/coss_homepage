@@ -104,7 +104,7 @@ export interface SiteContent {
     items: Record<NewsId, NewsText>;
   };
 
-  /** 월간 지식재산 뉴스 리포트(목록·상세) 화면 문구 — 리포트 내용은 content/reports/YYYY-MM.ts */
+  /** 월간 지식재산 뉴스 리포트(목록·상세) 화면 문구 — 리포트 내용은 content/reports/YYYY-MM.json */
   reports: {
     /** 뉴스 페이지의 리포트 목록 머리 */
     listIntro: SectionIntro;
@@ -125,6 +125,10 @@ export interface SiteContent {
     sectionIndex: string;
     newer: string;
     older: string;
+    /** 기사 본문을 받는 동안 / 받지 못했을 때 */
+    loading: string;
+    loadFailed: string;
+    reload: string;
     /** 원문 링크 이름 */
     link: { original: string; related: string };
     /** 링크 대상이 한국어 기사라는 안내(한국어 페이지는 빈 문자열) */

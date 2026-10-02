@@ -7,6 +7,7 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { intentHandlers } from '../../utils/browser';
 
 interface TextLinkProps {
   children: ReactNode;
@@ -17,9 +18,11 @@ interface TextLinkProps {
   /** 화살표 방향(기본: 내부 →, 외부 ↗) */
   arrow?: '→' | '←' | '↗' | '↓';
   className?: string;
+  /** 누르기 직전 신호(마우스 올림·초점·손가락 닿음) — 내부 경로의 미리 받기에 씀 */
+  onIntent?: () => void;
 }
 
-export function TextLink({ children, to, href, arrow, className }: TextLinkProps) {
+export function TextLink({ children, to, href, arrow, className, onIntent }: TextLinkProps) {
   const mark = arrow ?? (href ? '↗' : '→');
   const leading = mark === '←';
   const content = (
@@ -32,7 +35,7 @@ export function TextLink({ children, to, href, arrow, className }: TextLinkProps
   const classes = clsx('text-link', className);
 
   if (to) {
-    return <Link to={to} className={classes}>{content}</Link>;
+    return <Link to={to} className={classes} {...intentHandlers(onIntent)}>{content}</Link>;
   }
   if (href) {
     return <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>{content}</a>;

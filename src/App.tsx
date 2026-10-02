@@ -21,9 +21,11 @@ import { findReport } from './content/reports';
 import { DocumentMeta } from './i18n/DocumentMeta';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
 import { DEFAULT_LOCALE, Locale, LOCALES, localePrefix } from './i18n/locales';
+import { whenElement } from './utils/browser';
 
 /**
  * 경로가 바뀌면 맨 위로, 해시(#service-3 등)가 있으면 해당 요소 위치로 스크롤합니다.
+ * 리포트 기사처럼 나중에 받아 그리는 요소는 나타날 때까지 기다립니다.
  */
 function ScrollManager() {
   const { pathname, hash, key } = useLocation();
@@ -34,10 +36,16 @@ function ScrollManager() {
       return undefined;
     }
     // 새 페이지가 그려진 다음 위치를 찾습니다.
+    let cancel: () => void = () => undefined;
     const timer = window.setTimeout(() => {
-      document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      cancel = whenElement(decodeURIComponent(hash.slice(1)), (element) =>
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+      );
     }, 50);
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timer);
+      cancel();
+    };
   }, [pathname, hash, key]);
 
   return null;
@@ -63,20 +71,20 @@ function MemberDetailRoute() {
 }
 
 /**
- * 월간 리포트 상세 라우트. 없는 월이면 뉴스 목록으로 보냅니다.
+ * 월간 리포트 상세 라우트. 없는 월이면(요약으로 바로 판단) 뉴스 목록으로 보냅니다.
  */
 function ReportRoute() {
   const { month } = useParams<{ month: string }>();
   const { path } = useI18n();
-  const report = findReport(month);
+  const summary = findReport(month);
 
-  if (!report) {
+  if (!summary) {
     return <Navigate to={path('/news')} replace />;
   }
 
   return (
     <PageLayout>
-      <ReportPage report={report} />
+      <ReportPage key={summary.month} summary={summary} />
     </PageLayout>
   );
 }

@@ -1,22 +1,19 @@
 /**
  * @file types.ts
  * @description 월간 지식재산 뉴스 리포트의 데이터 구조.
- *              리포트 한 달치 = 데이터 파일 하나(`YYYY-MM.json`). `scripts/reports.py import`가 워드 원문에서 만들고,
- *              빌드 전에 `scripts/reports.py check`가 원문 일치·번역·링크를 검사합니다(통과해야 빌드됨).
+ *              리포트 한 달치 = 데이터 파일 하나(`YYYY-MM.json`). 작업 폴더(coss_homepage_edit)의 리포트 도구가 워드 원문에서 만들고,
+ *              push 전에 원문 일치·번역·링크를 검사합니다.
  */
 
 import { OutletId } from '../../constants/outlets';
 import { Locale } from '../../i18n/locales';
 
 /**
- * 리포트 안의 분류. 화면 순서는 REPORT_SECTION_ORDER를 따릅니다.
+ * 리포트 안의 분류. 화면 순서는 REPORT_DETAIL_SECTIONS를 따릅니다.
  * 워드 원문의 《訴訟関係》《行政》《その他》가 각각 litigation·administration·other로 들어갑니다.
  * 사이트 표기는 내용에 맞춰 분쟁(紛争)·정책·행정(政策・行政)·기술·산업(技術・産業)입니다(content/{ko,ja}.ts).
  */
 export type ReportSectionId = 'litigation' | 'administration' | 'other' | 'features';
-
-/** 데이터·검사에서 다루는 모든 분류 */
-export const REPORT_SECTION_ORDER: ReportSectionId[] = ['litigation', 'administration', 'other', 'features'];
 
 /**
  * 리포트 상세 페이지에 보이는 분류와 순서. 주요 기사(features, 긴 버전)는 따로 분류를 두지 않고,
@@ -69,7 +66,7 @@ export interface ReportArticle {
 export interface MonthlyReport {
   /** 리포트 월(YYYY-MM) — 주소(/news/reports/2026-08)와 파일 이름에 그대로 씁니다. */
   month: string;
-  /** 원문 워드 파일 경로(이 PC에만 보관, 저장소에는 올리지 않음) */
+  /** 원문 워드 파일 경로 — 작업 폴더(coss_homepage_edit) 기준. 저장소에는 올리지 않음 */
   source: string;
   /** 원문 구조의 지문(SHA-256) — 원본이 없는 곳에서도 일본어가 바뀌지 않았는지 확인 */
   sourceDigest: string;
@@ -77,4 +74,17 @@ export interface MonthlyReport {
   /** 워드에 없지만 승인을 받아 넣은 일본어 문구(예: 주요 기사 제목) */
   additions: string[];
   sections: Record<ReportSectionId, ReportArticle[]>;
+}
+
+/**
+ * 목록 카드와 상세 머리에 쓰는 리포트 요약. 빌드할 때 데이터 파일에서 계산해 기본 JS에 넣고(plugins/reportSummary.ts),
+ * 기사 본문(MonthlyReport)은 달마다 따로 나눈 파일로 상세 페이지를 열 때 받습니다.
+ */
+export interface ReportSummary {
+  month: string;
+  text: MonthlyReport['text'];
+  /** 상세 페이지에 실리는 기사 수 */
+  count: number;
+  /** 상세 페이지에 보이는 분류(순서대로, 기사가 있는 것만) */
+  sections: ReportSectionId[];
 }

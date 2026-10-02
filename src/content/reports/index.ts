@@ -1,17 +1,22 @@
 /**
  * @file index.ts
- * @description 월간 리포트 목록. 이 폴더에 `YYYY-MM.json` 파일을 추가하면 자동으로 등록됩니다(따로 적을 필요 없음).
- *              데이터의 정확성(원문 일치·번역·링크)은 빌드 전에 scripts/reports.py check가 검사합니다.
+ * @description 월간 리포트 목록과 불러오기. 이 폴더에 `YYYY-MM.json` 파일을 추가하면 자동으로 등록됩니다(따로 적을 필요 없음).
+ *              - 요약(월·제목·머리말·기사 수·분류): 빌드할 때 계산해 기본 JS에 넣습니다(plugins/reportSummary.ts). 목록·상세 머리에 씀
+ *              - 기사 본문: 달마다 따로 나눈 파일. 상세 페이지를 열 때, 또는 미리 받기(preloadReport)로 받습니다
+ *              데이터의 정확성(원문 일치·번역·링크)은 작업 폴더(coss_homepage_edit)의 리포트 검사로 push 전에 확인합니다.
  */
 
-import { MonthlyReport, ReportArticle, ReportSectionId, REPORT_DETAIL_SECTIONS } from './types';
+import { MonthlyReport, ReportSummary } from './types';
 
-const modules = import.meta.glob<{ default: MonthlyReport }>('./[0-9][0-9][0-9][0-9]-[0-9][0-9].json', { eager: true });
+const summaryModules = import.meta.glob<ReportSummary>('./[0-9][0-9][0-9][0-9]-[0-9][0-9].json', {
+  query: '?summary',
+  import: 'default',
+  eager: true,
+});
+const reportLoaders = import.meta.glob<MonthlyReport>('./[0-9][0-9][0-9][0-9]-[0-9][0-9].json', { import: 'default' });
 
-/** 최신 달이 앞에 오도록 정렬한 리포트 목록 */
-export const reports: MonthlyReport[] = Object.values(modules)
-  .map((module) => module.default)
-  .sort((a, b) => b.month.localeCompare(a.month));
+/** 최신 달이 앞에 오도록 정렬한 리포트 요약 목록 */
+export const reports: ReportSummary[] = Object.values(summaryModules).sort((a, b) => b.month.localeCompare(a.month));
 
 /** 리포트 상세 경로(언어 공통). 실제 링크는 useI18n().path()로 언어 접두어를 붙여 씁니다. */
 export const reportPath = (month: string) => `/news/reports/${month}`;
@@ -27,29 +32,47 @@ export function adjacentReports(month: string) {
   };
 }
 
-/** 분류 안의 기사를 최신순으로 */
-export const sortArticles = (articles: ReportArticle[]) => [...articles].sort((a, b) => b.date.localeCompare(a.date));
+/* ---------- 기사 본문 불러오기 ---------- */
 
-/** 상세 페이지에 보이는 분류(순서대로, 기사가 있는 것만) */
-export const visibleSections = (report: MonthlyReport): ReportSectionId[] =>
-  REPORT_DETAIL_SECTIONS.filter((id) => sectionArticles(report, id).length > 0);
+const loaded = new Map<string, MonthlyReport>();
+const pending = new Map<string, Promise<MonthlyReport>>();
 
-/** 짧은 버전이 없어 따로 실어야 하는 주요 기사 */
-const standaloneFeatures = (report: MonthlyReport) => {
-  const linked = new Set(REPORT_DETAIL_SECTIONS.flatMap((id) => report.sections[id].map((a) => a.full)));
-  return report.sections.features.filter((feature) => !linked.has(feature.id));
-};
+/** 이미 받아 둔 리포트(없으면 undefined) — 미리 받은 달은 상세 페이지가 기다림 없이 바로 그립니다. */
+export const getLoadedReport = (month: string) => loaded.get(month);
 
-/** 분류 하나에 실리는 기사(최신순). 기술·산업에는 짧은 버전이 없는 주요 기사도 함께 실립니다. */
-export const sectionArticles = (report: MonthlyReport, id: ReportSectionId): ReportArticle[] =>
-  sortArticles(id === 'other' ? [...report.sections.other, ...standaloneFeatures(report)] : report.sections[id]);
+/** 리포트 본문을 받습니다. 같은 달을 동시에 여러 번 불러도 한 번만 받습니다. */
+export function loadReport(month: string): Promise<MonthlyReport> {
+  const done = loaded.get(month);
+  if (done) return Promise.resolve(done);
 
-/** 짧은 버전이 펼칠 긴 버전(주요 기사) */
-export const fullArticleOf = (report: MonthlyReport, article: ReportArticle) =>
-  article.full ? report.sections.features.find((feature) => feature.id === article.full) : undefined;
+  let request = pending.get(month);
+  if (!request) {
+    const loader = reportLoaders[`./${month}.json`];
+    if (!loader) return Promise.reject(new Error(`리포트가 없습니다: ${month}`));
+    request = loader()
+      .then((report) => {
+        loaded.set(month, report);
+        return report;
+      })
+      .finally(() => pending.delete(month));
+    pending.set(month, request);
+  }
+  return request;
+}
 
-/** 상세 페이지에 실리는 기사 수 */
-export const countArticles = (report: MonthlyReport) =>
-  REPORT_DETAIL_SECTIONS.reduce((sum, id) => sum + sectionArticles(report, id).length, 0);
+/** 휴대폰 데이터 절약 모드 */
+const saveData = () =>
+  typeof navigator !== 'undefined' &&
+  (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
 
+/**
+ * 곧 열 것 같은 달을 미리 받습니다(카드·이전/다음 달 링크에 마우스·초점·손가락이 닿을 때, 뉴스 목록이 한가할 때 최신 달).
+ * 데이터 절약 모드면 받지 않고, 실패해도 조용히 넘어갑니다(실제로 열 때 다시 받음).
+ */
+export function preloadReport(month: string) {
+  if (loaded.has(month) || pending.has(month) || saveData()) return;
+  loadReport(month).catch(() => undefined);
+}
+
+export * from './structure';
 export * from './types';

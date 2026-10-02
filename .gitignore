@@ -22,5 +22,8 @@ build
 .DS_Store
 Thumbs.db
 
-# 월간 리포트 원본 워드 파일 — 작성자·회사 등 숨은 정보가 있어 저장소에 올리지 않음(이 PC에만 보관, 지문으로 검사)
-reports/source/
+# 월간 리포트 원본 워드 파일은 작업 폴더(coss_homepage_edit)에만 둡니다 — 실수로 넣어도 올라가지 않게
+*.docx
+
+# 작업 지침 연결(이 PC 전용)
+CLAUDE.local.md

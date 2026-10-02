@@ -1,6 +1,6 @@
 /**
  * @file ReportSection.tsx
- * @description 리포트의 분류 하나(소송·행정·기타·주요 기사) — 분류 머리(번호·이름·기사 수)와 최신순 기사 목록.
+ * @description 리포트의 분류 하나(분쟁 / 정책·행정 / 기술·산업) — 분류 머리(번호·이름·기사 수)와 최신순 기사 목록.
  */
 
 import { fullArticleOf, MonthlyReport, ReportSectionId, sectionArticles } from '../../content/reports';

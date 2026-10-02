@@ -60,7 +60,6 @@
       },
       "scripts": {
             "dev": "vite",
-            "check:reports": "node scripts/run-python.mjs scripts/reports.py check",
-            "build": "npm run check:reports && vite build"
+            "build": "vite build"
       }
 }
