@@ -52,6 +52,7 @@ export const outlets = {
   kbs: { ko: 'KBS뉴스', ja: 'KBSニュース' },
   mdtoday: { ko: '메디컬투데이', ja: 'メディカルトゥデイ' },
   snmnews: { ko: '철강금속신문', ja: '鉄鋼金属新聞' },
+  seoulwire: { ko: '서울와이어', ja: 'ソウルワイヤ' },
 
   // 원문 대신 연결하는 관련 기사 매체
   etoday: { ko: '이투데이', ja: 'イートゥデイ' },
