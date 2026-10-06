@@ -2,9 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 import { reportSummary } from './plugins/reportSummary';
+import { staticPages } from './plugins/staticPages';
 
 export default defineConfig({
-  plugins: [react(), reportSummary()],
+  plugins: [react(), reportSummary(), staticPages()],
   base: '/',
   publicDir: 'src/public',
   resolve: {

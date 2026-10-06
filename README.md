@@ -26,6 +26,7 @@ npm run build           # 타입 검사 후 build/에 결과물
 | `src/content/reports/YYYY-MM.json` | 월간 지식재산 뉴스 리포트. 파일을 추가하면 자동 등록 |
 | `src/components/`, `src/styles/` | 화면 부품과 스타일 |
 | `src/public/` | 이미지·파비콘·`404.html`(SPA 주소 복원) |
-| `plugins/` | 빌드 플러그인(리포트 요약) |
+| `plugins/` | 빌드 플러그인 — 리포트 요약, 주소별 페이지 HTML·링크 미리보기 그림·sitemap.xml·robots.txt 생성 |
+| `src/seo/pageMeta.ts` | 페이지별 제목·설명·대표 그림 규칙(빌드와 화면이 같이 씀) |
 
 작업 지침, 리포트 도구, 원문은 이 저장소에 두지 않습니다.

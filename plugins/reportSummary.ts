@@ -6,10 +6,9 @@
  *              (src/content/reports/index.ts). 요약 계산은 화면과 같은 함수(structure.ts)를 씁니다.
  */
 
-import { readFileSync } from 'node:fs';
 import type { Plugin } from 'vite';
 import { summarizeReport } from '../src/content/reports/structure';
-import type { MonthlyReport } from '../src/content/reports/types';
+import { readReport } from './reportData';
 
 const QUERY = '?summary';
 /** 가상 모듈 ID — \0으로 시작하면 다른 플러그인이 건드리지 않고, 끝을 .js로 하면 Vite의 JSON 변환을 거치지 않습니다. */
@@ -29,8 +28,7 @@ export function reportSummary(): Plugin {
       if (!id.startsWith(PREFIX)) return null;
       const file = id.slice(PREFIX.length, -SUFFIX.length);
       this.addWatchFile(file);
-      const report = JSON.parse(readFileSync(file, 'utf8')) as MonthlyReport;
-      return `export default ${JSON.stringify(summarizeReport(report))};`;
+      return `export default ${JSON.stringify(summarizeReport(readReport(file)))};`;
     },
   };
 }
