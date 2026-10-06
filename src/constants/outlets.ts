@@ -46,12 +46,17 @@ export const outlets = {
   inews24: { ko: '아이뉴스24', ja: 'アイニュース24' },
   dailypharm: { ko: '데일리팜', ja: 'デイリーファーム' },
   kpaanews: { ko: '지식재산뉴스', ja: '知識財産ニュース' },
+  khan: { ko: '경향신문', ja: '京郷新聞' },
+  joongang: { ko: '중앙일보', ja: '中央日報' },
+  munhwa: { ko: '문화일보', ja: '文化日報' },
+  kbs: { ko: 'KBS뉴스', ja: 'KBSニュース' },
+  mdtoday: { ko: '메디컬투데이', ja: 'メディカルトゥデイ' },
+  snmnews: { ko: '철강금속신문', ja: '鉄鋼金属新聞' },
 
   // 원문 대신 연결하는 관련 기사 매체
   etoday: { ko: '이투데이', ja: 'イートゥデイ' },
   heraldcorp: { ko: '헤럴드경제', ja: 'ヘラルド経済' },
   seoul: { ko: '서울신문', ja: 'ソウル新聞' },
-  khan: { ko: '경향신문', ja: '京郷新聞' },
   newswire: { ko: '뉴스와이어', ja: 'ニュースワイヤー' },
   patentnews: { ko: '특허뉴스', ja: '特許ニュース' },
   kcia: { ko: '대한화장품협회', ja: '大韓化粧品協会' },
