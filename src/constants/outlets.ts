@@ -42,6 +42,10 @@ export const outlets = {
   thebiz: { ko: '더비즈', ja: 'ザ・ビズ' },
   kmnews: { ko: '기계신문', ja: '機械新聞' },
   daily365: { ko: '데일리365', ja: 'デイリー365' },
+  theguru: { ko: '더구루', ja: 'ザ・グル' },
+  inews24: { ko: '아이뉴스24', ja: 'アイニュース24' },
+  dailypharm: { ko: '데일리팜', ja: 'デイリーファーム' },
+  kpaanews: { ko: '지식재산뉴스', ja: '知識財産ニュース' },
 
   // 원문 대신 연결하는 관련 기사 매체
   etoday: { ko: '이투데이', ja: 'イートゥデイ' },
@@ -50,6 +54,7 @@ export const outlets = {
   khan: { ko: '경향신문', ja: '京郷新聞' },
   newswire: { ko: '뉴스와이어', ja: 'ニュースワイヤー' },
   patentnews: { ko: '특허뉴스', ja: '特許ニュース' },
+  kcia: { ko: '대한화장품협회', ja: '大韓化粧品協会' },
 } as const satisfies Record<string, Record<Locale, string>>;
 
 export type OutletId = keyof typeof outlets;
