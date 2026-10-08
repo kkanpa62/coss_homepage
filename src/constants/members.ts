@@ -25,7 +25,7 @@ export const memberProfiles = [
   { id: 5, images: boxImages('moonhyundon') },
   { id: 6, images: boxImages('sungjinsol') },
   { id: 7, images: boxImages('giljinsung') },
-  { id: 8, images: boxImages('choichunghon') },
+  // id 8(최충헌)은 2026-10 퇴사로 삭제. 새 구성원은 ID를 다시 쓰지 말고 10부터 씁니다.
   { id: 9, images: singleImage('/images/members/murakami.png') },
 ] as const;
 

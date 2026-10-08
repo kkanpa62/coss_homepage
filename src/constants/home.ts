@@ -6,7 +6,7 @@
 import { MemberId } from './members';
 
 /** 홈 구성원 섹션에 표시할 구성원 ID와 순서 */
-export const HOME_MEMBER_ORDER: MemberId[] = [1, 6, 7, 2, 5, 3, 4, 8];
+export const HOME_MEMBER_ORDER: MemberId[] = [1, 6, 7, 2, 5, 3, 4];
 
 /** 차별화된 강점 3개 — 배열 순서가 표시 순서입니다. */
 export const strengthDefs = [
