@@ -53,6 +53,11 @@ export const outlets = {
   mdtoday: { ko: '메디컬투데이', ja: 'メディカルトゥデイ' },
   snmnews: { ko: '철강금속신문', ja: '鉄鋼金属新聞' },
   seoulwire: { ko: '서울와이어', ja: 'ソウルワイヤ' },
+  ajunews: { ko: '아주경제', ja: '亜洲経済新聞' },
+  theviewers: { ko: '뷰어스', ja: 'ビュアーズ' },
+  economysci: { ko: '이코노미사이언스', ja: 'エコノミーサイエンス' },
+  dealsite: { ko: '딜사이트', ja: 'ディールサイト' },
+  newstnt: { ko: '뉴스티앤티', ja: 'ニュースT&T' },
 
   // 원문 대신 연결하는 관련 기사 매체
   etoday: { ko: '이투데이', ja: 'イートゥデイ' },

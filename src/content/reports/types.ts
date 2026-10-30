@@ -56,6 +56,8 @@ export interface ReportArticle {
   date: string;
   /** 리포트에 적힌 출처 매체 */
   outlet: OutletId;
+  /** 'link': 워드 꼬리표에 매체가 빠져 원문 기사의 매체를 outlet에 적은 경우 */
+  outletFrom?: 'link';
   /** 주요 기사의 짧은 버전이면, 「전문 보기」로 펼칠 긴 버전(features)의 id */
   full?: string;
   link?: ReportLink;
